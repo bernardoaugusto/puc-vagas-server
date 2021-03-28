@@ -15,7 +15,7 @@ interface IRequest {
   identifier: string;
 }
 @injectable()
-export default class CreateUserAdminService {
+export default class CreateUserTeacherService {
   constructor(
     @inject('UsersRepository')
     private usersRepository: IUsersRepository,
@@ -47,7 +47,7 @@ export default class CreateUserAdminService {
     const user = await this.usersRepository.create({
       name,
       email,
-      is_admin: true,
+      is_teacher: true,
       password: hashed_password,
       identifier,
       phone_number,
