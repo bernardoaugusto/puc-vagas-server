@@ -37,7 +37,7 @@ class User {
 
   @Exclude()
   @Column({ default: false })
-  is_contract: boolean;
+  is_contractor: boolean;
 
   @Exclude()
   @Column({ default: false })

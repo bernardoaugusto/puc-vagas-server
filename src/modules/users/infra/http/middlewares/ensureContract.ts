@@ -7,7 +7,7 @@ export default function ensureAdmin(
   response: Response,
   next: NextFunction,
 ): void {
-  if (request.user.is_contract === false) {
+  if (request.user.is_contractor === false) {
     throw new AppError('No permission to access this resource', 401);
   }
 

@@ -3,12 +3,12 @@ import { Router } from 'express';
 import { celebrate, Segments, Joi } from 'celebrate';
 import configValidateRoute from '@config/route';
 import validateNameAndEmailOfUser from '@modules/users/common/validations/validateNameEmailOfUser';
-import UsersContractController from '../controllers/UsersContractController';
+import UsersContractorController from '../controllers/UsersContractorController';
 
-const usersContractRoutes = Router();
-const usersContractController = new UsersContractController();
+const usersContractorRoutes = Router();
+const usersContractorController = new UsersContractorController();
 
-usersContractRoutes.post(
+usersContractorRoutes.post(
   '/',
   celebrate(
     {
@@ -20,10 +20,10 @@ usersContractRoutes.post(
     },
     configValidateRoute,
   ),
-  usersContractController.create,
+  usersContractorController.create,
 );
 
-usersContractRoutes.put(
+usersContractorRoutes.put(
   '/',
   celebrate(
     {
@@ -33,10 +33,10 @@ usersContractRoutes.put(
     },
     configValidateRoute,
   ),
-  usersContractController.update,
+  usersContractorController.update,
 );
 
-usersContractRoutes.patch(
+usersContractorRoutes.patch(
   '/:id',
   celebrate(
     {
@@ -46,7 +46,7 @@ usersContractRoutes.patch(
     },
     configValidateRoute,
   ),
-  usersContractController.inactivate,
+  usersContractorController.inactivate,
 );
 
-export default usersContractRoutes;
+export default usersContractorRoutes;

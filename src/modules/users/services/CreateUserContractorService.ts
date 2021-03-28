@@ -15,7 +15,7 @@ interface IRequest {
   identifier: string;
 }
 @injectable()
-export default class CreateUserContractService {
+export default class CreateUserContractorService {
   constructor(
     @inject('UsersRepository')
     private usersRepository: IUsersRepository,
@@ -47,7 +47,7 @@ export default class CreateUserContractService {
     const user = await this.usersRepository.create({
       name,
       email,
-      is_contract: true,
+      is_contractor: true,
       password: hashed_password,
       identifier,
       phone_number,

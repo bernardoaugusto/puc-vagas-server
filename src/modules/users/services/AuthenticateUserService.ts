@@ -51,7 +51,8 @@ export default class AuthenticateUserService {
 
     const token = sign(
       {
-        isAdmin: user.is_admin,
+        is_teacher: user.is_teacher,
+        is_contractor: user.is_contractor,
       },
       secret,
       { subject: user.id, expiresIn },

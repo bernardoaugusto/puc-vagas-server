@@ -5,6 +5,6 @@ export default interface ICreateUserDTO {
   phone_number: string;
   identifier: string;
 
-  is_contract?: boolean;
+  is_contractor?: boolean;
   is_teacher?: boolean;
 }

@@ -7,7 +7,7 @@ export default function ensureUser(
   response: Response,
   next: NextFunction,
 ): void {
-  if (request.user.is_contract === true || request.user.is_teacher === true) {
+  if (request.user.is_contractor === true || request.user.is_teacher === true) {
     throw new AppError('No permission to access this resource', 401);
   }
 
