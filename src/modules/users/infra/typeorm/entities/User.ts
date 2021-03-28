@@ -37,7 +37,11 @@ class User {
 
   @Exclude()
   @Column({ default: false })
-  is_admin: boolean;
+  is_contract: boolean;
+
+  @Exclude()
+  @Column({ default: false })
+  is_teacher: boolean;
 
   @CreateDateColumn()
   created_at: Date;
