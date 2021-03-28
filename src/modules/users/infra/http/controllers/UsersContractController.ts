@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 
 import { container } from 'tsyringe';
 import { classToClass } from 'class-transformer';
-import CreateUserAdminService from '@modules/users/services/CreateUserAdminService';
+import CreateUserContractService from '@modules/users/services/CreateUserContractService';
 import UpdateUserService from '@modules/users/services/UpdateUserService';
 import InactivateUserService from '@modules/users/services/InactivateUserService';
 
@@ -17,9 +17,9 @@ export default class UsersAdminController {
       phone_number,
     } = request.body;
 
-    const createUserAdminService = container.resolve(CreateUserAdminService);
+    const createUserContractService = container.resolve(CreateUserContractService);
 
-    const admin_created = await createUserAdminService.execute({
+    const admin_created = await createUserContractService.execute({
       email,
       password,
       name,
