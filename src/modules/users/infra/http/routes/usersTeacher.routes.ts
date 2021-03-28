@@ -3,12 +3,12 @@ import { Router } from 'express';
 import { celebrate, Segments, Joi } from 'celebrate';
 import configValidateRoute from '@config/route';
 import validateNameAndEmailOfUser from '@modules/users/common/validations/validateNameEmailOfUser';
-import UsersAdminController from '../controllers/UsersAdminController';
+import UsersTeacherController from '../controllers/UsersTeacherController';
 
-const usersAdminRoutes = Router();
-const usersAdminController = new UsersAdminController();
+const usersTeacherRoutes = Router();
+const usersTeacherController = new UsersTeacherController();
 
-usersAdminRoutes.post(
+usersTeacherRoutes.post(
   '/',
   celebrate(
     {
@@ -20,10 +20,10 @@ usersAdminRoutes.post(
     },
     configValidateRoute,
   ),
-  usersAdminController.create,
+  usersTeacherController.create,
 );
 
-usersAdminRoutes.put(
+usersTeacherRoutes.put(
   '/',
   celebrate(
     {
@@ -33,10 +33,10 @@ usersAdminRoutes.put(
     },
     configValidateRoute,
   ),
-  usersAdminController.update,
+  usersTeacherController.update,
 );
 
-usersAdminRoutes.patch(
+usersTeacherRoutes.patch(
   '/:id',
   celebrate(
     {
@@ -46,7 +46,7 @@ usersAdminRoutes.patch(
     },
     configValidateRoute,
   ),
-  usersAdminController.inactivate,
+  usersTeacherController.inactivate,
 );
 
-export default usersAdminRoutes;
+export default usersTeacherRoutes;
