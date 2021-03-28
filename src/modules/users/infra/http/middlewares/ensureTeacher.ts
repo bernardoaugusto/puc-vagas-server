@@ -7,7 +7,7 @@ export default function ensureAdmin(
   response: Response,
   next: NextFunction,
 ): void {
-  if (request.user.isAdmin === false) {
+  if (request.user.is_teacher === false) {
     throw new AppError('No permission to access this resource', 401);
   }
 

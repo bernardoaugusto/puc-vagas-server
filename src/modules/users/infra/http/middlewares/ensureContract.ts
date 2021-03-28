@@ -2,12 +2,12 @@ import { Request, Response, NextFunction } from 'express';
 
 import AppError from '@shared/errors/AppError';
 
-export default function ensureUser(
+export default function ensureAdmin(
   request: Request,
   response: Response,
   next: NextFunction,
 ): void {
-  if (request.user.is_contract === true || request.user.is_teacher === true) {
+  if (request.user.is_contract === false) {
     throw new AppError('No permission to access this resource', 401);
   }
 
