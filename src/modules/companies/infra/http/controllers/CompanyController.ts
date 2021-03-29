@@ -9,54 +9,54 @@ import UpdateCompanyService from '../../../services/UpdateCompanyService';
 import RemoveCompanyService from '../../../services/RemoveCompanyService';
 
 export default class CompanyController {
-    public async create(request: Request, response: Response): Promise<Response> {
-        const company = request.body;
+  public async create(request: Request, response: Response): Promise<Response> {
+    const company = request.body;
 
-        const createCompanyService = container.resolve(CreateCompanyService);
+    const createCompanyService = container.resolve(CreateCompanyService);
 
-        const companyCreated = await createCompanyService.execute(company);
+    const companyCreated = await createCompanyService.execute(company);
 
-        return response.status(201).json(classToClass(companyCreated));
-    }
+    return response.status(201).json(classToClass(companyCreated));
+  }
 
-    public async getById(request: Request, response: Response): Promise<Response> {
-        const companyId = request.params.id;
+  public async getById(request: Request, response: Response): Promise<Response> {
+    const companyId = request.params.id;
 
-        const getByIdCompanyService = container.resolve(GetByIdCompanyService);
+    const getByIdCompanyService = container.resolve(GetByIdCompanyService);
 
-        const company = await getByIdCompanyService.execute(companyId);
+    const company = await getByIdCompanyService.execute(companyId);
 
-        return response.status(200).json(classToClass(company));
-    }
+    return response.status(200).json(classToClass(company));
+  }
 
-    public async getAll(request: Request, response: Response): Promise<Response> {
-        const query = request.query as Record<string, string>;
-        const withPagination = JSON.parse(query.withPagination || 'true');
+  public async getAll(request: Request, response: Response): Promise<Response> {
+    const query = request.query as Record<string, string>;
+    const withPagination = JSON.parse(query.withPagination || 'true');
 
-        const getAllCompanyService = container.resolve(GetAllCompanyService);
-        const company = await getAllCompanyService.execute(query, withPagination);
+    const getAllCompanyService = container.resolve(GetAllCompanyService);
+    const company = await getAllCompanyService.execute(query, withPagination);
 
-        return response.status(200).json(classToClass(company));
-    }
+    return response.status(200).json(classToClass(company));
+  }
 
-    public async update(request: Request, response: Response): Promise<Response> {
-        const updates = request.body;
-        const companyId = request.params.id;
+  public async update(request: Request, response: Response): Promise<Response> {
+    const updates = request.body;
+    const companyId = request.params.id;
 
-        const updateCompanyService = container.resolve(UpdateCompanyService);
+    const updateCompanyService = container.resolve(UpdateCompanyService);
 
-        const companyUpdated = await updateCompanyService.execute(updates, companyId);
+    const companyUpdated = await updateCompanyService.execute(updates, companyId);
 
-        return response.status(200).json(classToClass(companyUpdated));
-    }
+    return response.status(200).json(classToClass(companyUpdated));
+  }
 
-    public async remove(request: Request, response: Response): Promise<Response> {
-        const companyId = request.params.id;
+  public async remove(request: Request, response: Response): Promise<Response> {
+    const companyId = request.params.id;
 
-        const removeCompanyService = container.resolve(RemoveCompanyService);
+    const removeCompanyService = container.resolve(RemoveCompanyService);
 
-        await removeCompanyService.execute(companyId);
+    await removeCompanyService.execute(companyId);
 
-        return response.status(204).json();
-    }
+    return response.status(204).json();
+  }
 }

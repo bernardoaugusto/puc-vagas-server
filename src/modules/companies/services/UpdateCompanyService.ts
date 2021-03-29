@@ -7,22 +7,22 @@ import GetByIdCompanyService from './GetByIdCompanyService';
 
 @injectable()
 export default class UpdateCompanyService {
-    constructor(
-        @inject('CompanyRepository')
-        private companyRepository: ICompanyRepositoryDTO,
+  constructor(
+    @inject('CompanyRepository')
+    private companyRepository: ICompanyRepositoryDTO,
 
-        @inject('GetByIdCompanyService')
-        private getByIdCompanyService: GetByIdCompanyService,
-    ) {}
+    @inject('GetByIdCompanyService')
+    private getByIdCompanyService: GetByIdCompanyService,
+  ) {}
 
-    public async execute(
-        companyDataUpdates: ICompanyUpdateDTO,
-        companyId: string,
-    ): Promise<Company> {
-        const company = await this.getByIdCompanyService.execute(companyId);
+  public async execute(
+    companyDataUpdates: ICompanyUpdateDTO,
+    companyId: string,
+  ): Promise<Company> {
+    const company = await this.getByIdCompanyService.execute(companyId);
 
-        Object.assign(company, companyDataUpdates);
+    Object.assign(company, companyDataUpdates);
 
-        return this.companyRepository.update(company);
-    }
+    return this.companyRepository.update(company);
+  }
 }

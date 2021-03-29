@@ -6,15 +6,15 @@ import ICompanyRepositoryDTO from '../repositories/ICompanyRepositoryDTO';
 
 @injectable()
 export default class CreateCompanyService {
-    constructor(
-        @inject('CompanyRepository')
-        private companyRepository: ICompanyRepositoryDTO,
-    ) {}
+  constructor(
+    @inject('CompanyRepository')
+    private companyRepository: ICompanyRepositoryDTO,
+  ) {}
 
-    public async execute(companyData: ICompanyCreateDTO): Promise<Company> {
-        const company = new Company();
-        Object.assign(company, companyData);
+  public async execute(companyData: ICompanyCreateDTO): Promise<Company> {
+    const company = new Company();
+    Object.assign(company, companyData);
 
-        return this.companyRepository.create(company);
-    }
+    return this.companyRepository.create(company);
+  }
 }
