@@ -12,7 +12,7 @@ export default class Vacancy {
   id: string;
 
   @Column()
-  desription: string;
+  description: string;
 
   @Column()
   title: string;

@@ -5,6 +5,7 @@ import usersContractororRouter from '@modules/users/infra/http/routes/usersContr
 import usersTeacherRouter from '@modules/users/infra/http/routes/usersTeacher.routes';
 import passwordRouter from '@modules/users/infra/http/routes/password.routes';
 import softSkillsRouter from '@modules/softSkills/infra/http/routes/softSkill.routes';
+import vacanciesRouter from '@modules/vacancies/infra/http/routes/vacancy.routes';
 
 const routes = Router();
 
@@ -14,5 +15,6 @@ routes.use('/api/contractors', usersContractororRouter);
 routes.use('/api/sessions', sessionsRouter);
 routes.use('/api/password', passwordRouter);
 routes.use('/api/soft-skills', softSkillsRouter);
+routes.use('/api/vacancies', vacanciesRouter);
 
 export default routes;

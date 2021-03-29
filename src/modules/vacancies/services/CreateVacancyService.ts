@@ -12,6 +12,9 @@ export default class CreateVacancyService {
   ) {}
 
   public async execute(vacancyData: IVacancyCreateDTO): Promise<Vacancy> {
-    return this.vacancyRepository.create(vacancyData);
+    const vacancy = new Vacancy();
+    Object.assign(vacancy, vacancyData);
+
+    return this.vacancyRepository.create(vacancy);
   }
 }

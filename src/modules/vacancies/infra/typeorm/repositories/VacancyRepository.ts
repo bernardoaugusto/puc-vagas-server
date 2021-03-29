@@ -2,7 +2,6 @@ import { Repository, getRepository } from 'typeorm';
 import typeorm from '@seidor-cloud-produtos/typeorm';
 
 import Vacancy from '../entities/Vacancy';
-import IVacancyDTO from '../../../dtos/IVacancyDTO';
 import IVacancyRepository from '../../../repositories/IVacancyRepositoryDTO';
 
 export default class VacancyRepository implements IVacancyRepository {
@@ -12,7 +11,7 @@ export default class VacancyRepository implements IVacancyRepository {
     this.ormRepository = getRepository(Vacancy);
   }
 
-  public async create(vacancyData: IVacancyDTO): Promise<Vacancy> {
+  public async create(vacancyData: Vacancy): Promise<Vacancy> {
     const vacancy = this.ormRepository.create(vacancyData);
 
     return this.ormRepository.save(vacancy);
