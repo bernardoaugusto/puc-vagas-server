@@ -8,12 +8,20 @@ import UserRepository from '@modules/users/infra/typeorm/repositories/UsersRepos
 import IUsersTokenRepository from '@modules/users/repositories/IUsersTokenRepository';
 import UsersTokensRepository from '@modules/users/infra/typeorm/repositories/UsersTokensRepository';
 
+// Soft Skills
 import ISoftSkillRepositoryDTO from '@modules/softSkills/repositories/ISoftSkillRepositoryDTO';
 import SoftSkillRepository from '@modules/softSkills/infra/typeorm/repositories/SoftSkillRepository';
 import GetByIdSoftSkillService from '@modules/softSkills/services/GetByIdSoftSkillService';
+
+// Vacancies
 import IVacancyRepositoryDTO from '@modules/vacancies/repositories/IVacancyRepositoryDTO';
 import VacancyRepository from '@modules/vacancies/infra/typeorm/repositories/VacancyRepository';
 import GetByIdVacancyService from '@modules/vacancies/services/GetByIdVacancyService';
+
+// Companies
+import ICompanyRepositoryDTO from '@modules/companies/repositories/ICompanyRepositoryDTO';
+import CompanyRepository from '@modules/companies/infra/typeorm/repositories/CompanyRepository';
+import GetByIdCompanyService from '@modules/companies/services/GetByIdCompanyService';
 
 container.registerSingleton<IUsersRepository>('UsersRepository', UserRepository);
 container.registerSingleton<IUsersTokenRepository>(
@@ -31,7 +39,7 @@ container.registerSingleton<GetByIdVacancyService>(
   GetByIdVacancyService,
 );
 
-// Soft Skill
+// Soft Skills
 container.registerSingleton<ISoftSkillRepositoryDTO>(
   'SoftSkillRepository',
   SoftSkillRepository,
@@ -39,4 +47,14 @@ container.registerSingleton<ISoftSkillRepositoryDTO>(
 container.registerSingleton<GetByIdSoftSkillService>(
   'GetByIdSoftSkillService',
   GetByIdSoftSkillService,
+);
+
+// Companies
+container.registerSingleton<ICompanyRepositoryDTO>(
+  'CompanyRepository',
+  CompanyRepository,
+);
+container.registerSingleton<GetByIdCompanyService>(
+  'GetByIdCompanyService',
+  GetByIdCompanyService,
 );
