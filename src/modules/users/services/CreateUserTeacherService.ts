@@ -10,7 +10,7 @@ interface IRequest {
   name: string;
   email: string;
   password: string;
-  confirmPassword: string;
+  confirm_password: string;
   phone_number: string;
   identifier: string;
 }
@@ -30,9 +30,9 @@ export default class CreateUserTeacherService {
     password,
     phone_number,
     identifier,
-    confirmPassword,
+    confirm_password,
   }: IRequest): Promise<User> {
-    if (password !== confirmPassword) {
+    if (password !== confirm_password) {
       throw new AppError('The password and this confirm does not match');
     }
 
