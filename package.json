@@ -4,6 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
+    "precommit": "lint-staged",
     "build": "tsc --project tsconfig.json && tscpaths -p tsconfig.json -s ./src -o ./dist",
     "start": "node ./dist/shared/infra/http/server.js",
     "dev:server": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules src/shared/infra/http/server.ts tsc ",
@@ -55,6 +56,7 @@
     "eslint-plugin-import": "^2.21.2",
     "eslint-plugin-prettier": "^3.1.4",
     "jest": "^26.1.0",
+    "lint-staged": "^10.5.4",
     "pre-push": "^0.1.1",
     "prettier": "^2.0.5",
     "ts-jest": "^26.1.2",
@@ -66,6 +68,13 @@
     "silent": true,
     "run": [
       "build"
+    ]
+  },
+  "lint-staged": {
+    "src/**/*.js": [
+      "eslint src --ext .ts",
+      "prettier --write",
+      "git add"
     ]
   }
 }

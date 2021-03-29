@@ -6,6 +6,7 @@ services:
             context: .
             dockerfile: Dockerfile
             target: builder
+        command: 'npm run m:run'
         command: 'npm run dev:server'
         ports:
             - '3000:3000'
