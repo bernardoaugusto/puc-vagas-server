@@ -10,9 +10,9 @@ module.exports = [
         password: process.env.DB_PASSWORD || 'docker',
         database: process.env.DB_NAME || tindev,
         entities: [`./${process.env.NODE_ENV === 'production' ? 'dist' : 'src'}/modules/**/infra/typeorm/entities/*.{ts,js}`],
-        migrations: [`./${process.env.NODE_ENV === 'production' ? 'dist' : 'src'}/shared/infra/typeorm/migrations/*.{ts,js}`],
+        migrations: [`./${process.env.NODE_ENV === 'production' ? 'dist' : 'src'}/shared/infra/typeorm/{migrations,seed}/*.{ts,js}`],
         cli: {
-          "migrationsDir" : "./src/shared/infra/typeorm/migrations"
+          "migrationsDir" : `./${process.env.NODE_ENV === 'production' ? 'dist' : 'src'}/shared/infra/typeorm/migrations`
         }
     }
 ];
