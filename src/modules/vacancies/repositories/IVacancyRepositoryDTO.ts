@@ -1,4 +1,4 @@
-import { typeorm } from '@seidor-cloud-produtos/lib-seidor-common';
+import typeorm from '@seidor-cloud-produtos/typeorm';
 
 import Vacancy from '../infra/typeorm/entities/Vacancy';
 import IVacancyCreateDTO from '../dtos/IVacancyCreateDTO';
