@@ -2,6 +2,7 @@ import { inject, injectable } from 'tsyringe';
 import {
   formatParamsToTypeOrmOptionsWithPaginate,
   formatPaginateDataToResponse,
+  formatParamsToTypeOrmOptionsWithoutPaginate,
 } from '@seidor-cloud-produtos/typeorm';
 
 import Vacancy from '../infra/typeorm/entities/Vacancy';
@@ -29,15 +30,16 @@ export default class GetAllVacancyService {
         totalPages: number;
       })
   > {
-    const options = formatParamsToTypeOrmOptionsWithPaginate(queryParams, true);
-
     if (withPagination) {
+      const options = formatParamsToTypeOrmOptionsWithPaginate(queryParams, true);
       const arrayVacancy = await this.vacancyRepository.getAllWithPagination(
         options,
       );
 
       return formatPaginateDataToResponse(queryParams, arrayVacancy);
     }
+
+    const options = formatParamsToTypeOrmOptionsWithoutPaginate(queryParams, true);
 
     return this.vacancyRepository.getAllWithoutPagination(options);
   }

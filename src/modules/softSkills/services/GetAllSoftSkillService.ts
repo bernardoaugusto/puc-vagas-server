@@ -2,6 +2,7 @@ import { inject, injectable } from 'tsyringe';
 import {
   formatParamsToTypeOrmOptionsWithPaginate,
   formatPaginateDataToResponse,
+  formatParamsToTypeOrmOptionsWithoutPaginate,
 } from '@seidor-cloud-produtos/typeorm';
 
 import SoftSkill from '../infra/typeorm/entities/SoftSkill';
@@ -29,15 +30,16 @@ export default class GetAllSoftSkillService {
         totalPages: number;
       })
   > {
-    const options = formatParamsToTypeOrmOptionsWithPaginate(queryParams, true);
-
     if (withPagination) {
+      const options = formatParamsToTypeOrmOptionsWithPaginate(queryParams, true);
       const arraySoftSkill = await this.softSkillRepository.getAllWithPagination(
         options,
       );
 
       return formatPaginateDataToResponse(queryParams, arraySoftSkill);
     }
+
+    const options = formatParamsToTypeOrmOptionsWithoutPaginate(queryParams, true);
 
     return this.softSkillRepository.getAllWithoutPagination(options);
   }
