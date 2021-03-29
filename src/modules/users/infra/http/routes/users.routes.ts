@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import { celebrate, Segments } from 'celebrate';
+import { celebrate, Joi, Segments } from 'celebrate';
 import configValidateRoute from '@config/route';
 import {
   validateDataOfCreateUser,
@@ -55,6 +55,23 @@ usersRouter.patch(
     configValidateRoute,
   ),
   usersController.inactivate,
+);
+
+usersRouter.put(
+  '/company-employee/:id',
+  ensureAuthenticated,
+  celebrate(
+    {
+      [Segments.BODY]: {
+        company_id: Joi.string().uuid().required(),
+      },
+      [Segments.PARAMS]: {
+        ...validateId,
+      },
+    },
+    configValidateRoute,
+  ),
+  usersController.companyEmployee,
 );
 
 export default usersRouter;

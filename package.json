@@ -54,7 +54,9 @@
     "eslint-import-resolver-typescript": "^2.0.0",
     "eslint-plugin-import": "^2.21.2",
     "eslint-plugin-prettier": "^3.1.4",
+    "husky": "^6.0.0",
     "jest": "^26.1.0",
+    "lint-staged": "^10.5.4",
     "pre-push": "^0.1.1",
     "prettier": "^2.0.5",
     "ts-jest": "^26.1.2",
@@ -67,5 +69,17 @@
     "run": [
       "build"
     ]
+  },
+  "lint-staged": {
+    "src/**/*.js": [
+      "eslint src --ext .ts",
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   }
 }
