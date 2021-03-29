@@ -1,5 +1,8 @@
 import { inject, injectable } from 'tsyringe';
-import typeorm from '@seidor-cloud-produtos/typeorm';
+import {
+  formatParamsToTypeOrmOptionsWithPaginate,
+  formatPaginateDataToResponse,
+} from '@seidor-cloud-produtos/typeorm';
 
 import SoftSkill from '../infra/typeorm/entities/SoftSkill';
 import ISoftSkillRequestGetAllDTO from '../dtos/ISoftSkillRequestGetAllDTO';
@@ -26,14 +29,14 @@ export default class GetAllSoftSkillService {
         totalPages: number;
       })
   > {
-    const options = typeorm.formatParamsToTypeOrmOptionsWithPaginate(queryParams);
+    const options = formatParamsToTypeOrmOptionsWithPaginate(queryParams, true);
 
     if (withPagination) {
       const arraySoftSkill = await this.softSkillRepository.getAllWithPagination(
         options,
       );
 
-      return typeorm.formatPaginateDataToResponse(queryParams, arraySoftSkill);
+      return formatPaginateDataToResponse(queryParams, arraySoftSkill);
     }
 
     return this.softSkillRepository.getAllWithoutPagination(options);
