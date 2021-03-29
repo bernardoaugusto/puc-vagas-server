@@ -15,8 +15,7 @@
     "clean-database": "npm run typeorm schema:drop && npm run typeorm migration:run",
     "test": "jest",
     "clean-jest": "jest --clearCache",
-    "tdd": "jest --watch --verbose=true",
-    "seed": "node ./dist/shared/infra/seed"
+    "tdd": "jest --watch --verbose=true"
   },
   "dependencies": {
     "@hapi/joi": "^17.1.1",
