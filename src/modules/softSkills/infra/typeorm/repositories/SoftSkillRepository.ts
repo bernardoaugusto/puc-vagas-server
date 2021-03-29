@@ -1,5 +1,5 @@
 import { Repository, getRepository } from 'typeorm';
-import { typeorm } from '@seidor-cloud-produtos/lib-seidor-common';
+import typeorm from '@seidor-cloud-produtos/typeorm';
 
 import SoftSkill from '../entities/SoftSkill';
 import ISoftSkillRepository from '../../../repositories/ISoftSkillRepositoryDTO';

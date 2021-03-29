@@ -1,5 +1,5 @@
 import { inject, injectable } from 'tsyringe';
-import { typeorm } from '@seidor-cloud-produtos/lib-seidor-common';
+import typeorm from '@seidor-cloud-produtos/typeorm';
 
 import SoftSkill from '../infra/typeorm/entities/SoftSkill';
 import ISoftSkillRequestGetAllDTO from '../dtos/ISoftSkillRequestGetAllDTO';
