@@ -55,7 +55,7 @@ class User {
   @OneToMany(() => UserToken, user_token => user_token.user)
   user_token?: Array<UserToken>;
 
-  @ManyToMany(() => Company, company => company.users)
+  @ManyToMany(() => Company, company => company.users, { eager: true })
   @JoinTable()
   companies: Company[];
 }

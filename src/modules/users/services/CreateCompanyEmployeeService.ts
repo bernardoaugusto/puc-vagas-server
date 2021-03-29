@@ -35,8 +35,6 @@ export default class CreateSoftSkillService {
 
     recruter.companies.push(companyFinded);
 
-    console.log(recruter);
-
     return this.usersRepository.save(recruter);
   }
 }

@@ -58,12 +58,12 @@ usersRouter.patch(
 );
 
 usersRouter.put(
-  '/company-employee',
+  '/company-employee/:id',
   ensureAuthenticated,
   celebrate(
     {
       [Segments.BODY]: {
-        company_id: Joi.string().email().required(),
+        company_id: Joi.string().uuid().required(),
       },
       [Segments.PARAMS]: {
         ...validateId,
