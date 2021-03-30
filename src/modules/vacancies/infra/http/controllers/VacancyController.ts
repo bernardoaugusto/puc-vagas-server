@@ -11,10 +11,11 @@ import RemoveVacancyService from '../../../services/RemoveVacancyService';
 export default class VacancyController {
   public async create(request: Request, response: Response): Promise<Response> {
     const vacancy = request.body;
+    const { user } = request;
 
     const createVacancyService = container.resolve(CreateVacancyService);
 
-    const vacancyCreated = await createVacancyService.execute(vacancy);
+    const vacancyCreated = await createVacancyService.execute(vacancy, user);
 
     return response.status(201).json(classToClass(vacancyCreated));
   }
