@@ -3,7 +3,7 @@ up:
 upd:
 	docker-compose up -d
 updb:
-	docker-compose up -d db mongo
+	docker-compose up -d db
 down:
 	docker-compose down
 logs:
