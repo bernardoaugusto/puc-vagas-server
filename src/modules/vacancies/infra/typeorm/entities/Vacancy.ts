@@ -1,9 +1,13 @@
+import Company from '@modules/companies/infra/typeorm/entities/Company';
+import User from '@modules/users/infra/typeorm/entities/User';
 import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
   CreateDateColumn,
   UpdateDateColumn,
+  ManyToOne,
+  JoinColumn,
 } from 'typeorm';
 
 @Entity('vacancies')
@@ -28,4 +32,18 @@ export default class Vacancy {
 
   @UpdateDateColumn()
   updated_at: Date;
+
+  @Column({ type: 'uuid' })
+  company_id: string;
+
+  @ManyToOne(() => Company)
+  @JoinColumn({ name: 'company_id' })
+  company?: Company;
+
+  @Column({ type: 'uuid' })
+  recruiter_id: string;
+
+  @ManyToOne(() => User)
+  @JoinColumn({ name: 'recruiter_id' })
+  recruiter?: User;
 }

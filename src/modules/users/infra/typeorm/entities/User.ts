@@ -11,6 +11,7 @@ import {
 
 import { Exclude } from 'class-transformer';
 import Company from '@modules/companies/infra/typeorm/entities/Company';
+import Vacancy from '@modules/vacancies/infra/typeorm/entities/Vacancy';
 import UserToken from './UserToken';
 
 @Entity('users')
@@ -58,6 +59,9 @@ class User {
   @ManyToMany(() => Company, company => company.users, { eager: true })
   @JoinTable()
   companies: Company[];
+
+  @OneToMany(() => Vacancy, vacancy => vacancy.company)
+  vacancies: Vacancy[];
 }
 
 export default User;
