@@ -14,5 +14,16 @@ module.exports = [
         cli: {
           "migrationsDir" : `./${process.env.NODE_ENV === 'production' ? 'dist' : 'src'}/shared/infra/typeorm/migrations`
         }
+    },
+    {
+      "name": "mongo",
+      "type" : "mongodb",
+      "host" : "localhost",
+      "port" : 27017,
+      "database" : "tindev",
+      "useUnifiedTopology": true,
+      "schemas" : [
+        `./${process.env.NODE_ENV === 'production' ? 'dist' : 'src'}/modules/**/infra/typeorm/schemas/*.{ts,js}`
+      ]
     }
 ];
