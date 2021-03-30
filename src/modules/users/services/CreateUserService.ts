@@ -5,15 +5,16 @@ import AppError from '@shared/errors/AppError';
 import User from '@modules/users/infra/typeorm/entities/User';
 import IUsersRepository from '../repositories/IUsersRepository';
 import IHashProvider from '../providers/HashProvider/models/IHashProvider';
+import ICreateUserDTO from '../dtos/ICreateUserDTO';
 
-interface IRequest {
-  name: string;
-  email: string;
-  password: string;
-  confirm_password: string;
-  phone_number: string;
-  identifier: string;
-}
+// interface IRequest {
+//   name: string;
+//   email: string;
+//   password: string;
+//   confirm_password: string;
+//   phone_number: string;
+//   identifier: string;
+// }
 
 @injectable()
 export default class CreateUserService {
@@ -32,7 +33,7 @@ export default class CreateUserService {
     name,
     password,
     phone_number,
-  }: IRequest): Promise<User> {
+  }: ICreateUserDTO): Promise<User> {
     if (password !== confirm_password) {
       throw new AppError('The password and this confirm does not match');
     }
@@ -45,7 +46,8 @@ export default class CreateUserService {
 
     const hashed_password = await this.hashProvider.generateHash(password);
 
-    const user = await this.usersRepository.create({
+    const user = new User();
+    Object.assign(user, {
       name,
       email,
       password: hashed_password,
@@ -53,6 +55,6 @@ export default class CreateUserService {
       phone_number,
     });
 
-    return user;
+    return this.usersRepository.create(user);
   }
 }

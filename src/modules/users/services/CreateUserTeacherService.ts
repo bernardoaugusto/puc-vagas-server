@@ -44,7 +44,8 @@ export default class CreateUserTeacherService {
 
     const hashed_password = await this.hashProvider.generateHash(password);
 
-    const user = await this.usersRepository.create({
+    const user = new User();
+    Object.assign(user, {
       name,
       email,
       is_teacher: true,
@@ -53,6 +54,6 @@ export default class CreateUserTeacherService {
       phone_number,
     });
 
-    return user;
+    return this.usersRepository.create(user);
   }
 }
