@@ -62,4 +62,6 @@ router.delete(
   vacancyController.remove,
 );
 
+router.post('/like/:id', vacancyController.like);
+
 export default router;

@@ -1,10 +1,10 @@
 import ILikeDislikeVacancyDTO from '@modules/vacancies/dtos/ILikeDislikeVacancyDTO';
-import IUserLikeDislikeRepository from '@modules/vacancies/repositories/IUserLikeDislikeRepository';
+import IVacancyLikeDislikeRepository from '@modules/vacancies/repositories/IVacancyLikeDislikeRepository';
 import { getMongoRepository, MongoRepository } from 'typeorm';
 import VacancyLikeDislike from '../schemas/VacancyLikeDislike';
 
-export default class UserLikeDislikeRepository
-  implements IUserLikeDislikeRepository {
+export default class VacancyLikeDislikeRepository
+  implements IVacancyLikeDislikeRepository {
   private ormRepository: MongoRepository<VacancyLikeDislike>;
 
   constructor() {
