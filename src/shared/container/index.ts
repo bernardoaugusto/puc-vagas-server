@@ -7,6 +7,8 @@ import IUsersRepository from '@modules/users/repositories/IUsersRepository';
 import UserRepository from '@modules/users/infra/typeorm/repositories/UsersRepository';
 import IUsersTokenRepository from '@modules/users/repositories/IUsersTokenRepository';
 import UsersTokensRepository from '@modules/users/infra/typeorm/repositories/UsersTokensRepository';
+import IVacancyRepository from '@modules/vacancies/repositories/IVacancyRepositoryDTO';
+import VacancyRepository from '@modules/vacancies/infra/typeorm/repositories/VacancyRepository';
 
 // Soft Skills
 import ISoftSkillRepositoryDTO from '@modules/softSkills/repositories/ISoftSkillRepositoryDTO';
@@ -15,7 +17,7 @@ import GetByIdSoftSkillService from '@modules/softSkills/services/GetByIdSoftSki
 
 // Vacancies
 import IVacancyRepositoryDTO from '@modules/vacancies/repositories/IVacancyRepositoryDTO';
-import VacancyRepository from '@modules/vacancies/infra/typeorm/repositories/VacancyRepository';
+
 import GetByIdVacancyService from '@modules/vacancies/services/GetByIdVacancyService';
 
 // Companies
