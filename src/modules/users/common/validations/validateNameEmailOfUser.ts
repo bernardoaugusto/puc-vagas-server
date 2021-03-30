@@ -11,6 +11,14 @@ export const validateUserData = {
   phone_number: Joi.string().required(),
   identifier: Joi.string().required(),
   password: Joi.string().required(),
+  soft_skills: Joi.array()
+    .items(
+      Joi.object({
+        name: Joi.string().required(),
+        stars: Joi.number().required(),
+      }),
+    )
+    .optional(),
 };
 
 export const validateDataOfCreateUser = {
