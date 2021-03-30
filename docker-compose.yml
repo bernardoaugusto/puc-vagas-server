@@ -6,8 +6,7 @@ services:
             context: .
             dockerfile: Dockerfile
             target: builder
-        command: 'npm run m:run'
-        command: 'npm run dev:server'
+        command: sh -c "npm run m:run && npm run dev:server"
         ports:
             - '3000:3000'
         volumes:
@@ -17,18 +16,37 @@ services:
             DB_PORT: 5432
             DB_USER: postgres
             DB_PASSWORD: postgres
-            DB_NAME: tinder-jobs-server
+            DB_NAME: pucvagas
+            MONGO_HOST: mongo
+            MONGO_PORT: 27017
+            MONGO_DBNAME: pucvagas
+        container_name: pucvagas-app
         depends_on:
             - db
+            - mongo
     db:
         image: postgres:13-alpine
         restart: always
         environment:
             POSTGRES_PASSWORD: postgres
-            POSTGRES_DB: tinder-jobs-server
+            POSTGRES_DB: pucvagas
+        container_name: pucvagas-postgres
         volumes:
             - pgdata:/var/lib/postgresql/data
+            - ./init.sql:/docker-entrypoint-initdb.d/init.sql
         ports:
             - '5432:5432'
+    mongo:
+        image: mongo:latest
+        ports:
+            - '27017:27017'
+        environment:
+            MONGO_HOST: mongo
+            MONGO_PORT: 27017
+            MONGO_DBNAME: pucvagas
+        container_name: pucvagas-mongo
+        volumes:
+            - mongodata:/data/mongo
 volumes:
     pgdata:
+    mongodata:
