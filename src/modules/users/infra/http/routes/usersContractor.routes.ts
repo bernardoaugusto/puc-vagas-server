@@ -13,9 +13,12 @@ usersContractorRoutes.post(
   celebrate(
     {
       [Segments.BODY]: {
-        password: Joi.string().required(),
         name: Joi.string().required(),
         email: Joi.string().email().required(),
+        phone_number: Joi.string().required(),
+        identifier: Joi.string().required(),
+        password: Joi.string().required(),
+        confirm_password: Joi.string().required(),
       },
     },
     configValidateRoute,

@@ -10,13 +10,53 @@ import UsersTokensRepository from '@modules/users/infra/typeorm/repositories/Use
 import IVacancyRepository from '@modules/vacancies/repositories/IVacancyRepositoryDTO';
 import VacancyRepository from '@modules/vacancies/infra/typeorm/repositories/VacancyRepository';
 
+// Soft Skills
+import ISoftSkillRepositoryDTO from '@modules/softSkills/repositories/ISoftSkillRepositoryDTO';
+import SoftSkillRepository from '@modules/softSkills/infra/typeorm/repositories/SoftSkillRepository';
+import GetByIdSoftSkillService from '@modules/softSkills/services/GetByIdSoftSkillService';
+
+// Vacancies
+import IVacancyRepositoryDTO from '@modules/vacancies/repositories/IVacancyRepositoryDTO';
+
+import GetByIdVacancyService from '@modules/vacancies/services/GetByIdVacancyService';
+
+// Companies
+import ICompanyRepositoryDTO from '@modules/companies/repositories/ICompanyRepositoryDTO';
+import CompanyRepository from '@modules/companies/infra/typeorm/repositories/CompanyRepository';
+import GetByIdCompanyService from '@modules/companies/services/GetByIdCompanyService';
+
 container.registerSingleton<IUsersRepository>('UsersRepository', UserRepository);
 container.registerSingleton<IUsersTokenRepository>(
   'UsersTokensRepository',
   UsersTokensRepository,
 );
 
-container.registerSingleton<IVacancyRepository>(
-  'VagancyRepository',
+// Vacancies
+container.registerSingleton<IVacancyRepositoryDTO>(
+  'VacancyRepository',
   VacancyRepository,
+);
+container.registerSingleton<GetByIdVacancyService>(
+  'GetByIdVacancyService',
+  GetByIdVacancyService,
+);
+
+// Soft Skills
+container.registerSingleton<ISoftSkillRepositoryDTO>(
+  'SoftSkillRepository',
+  SoftSkillRepository,
+);
+container.registerSingleton<GetByIdSoftSkillService>(
+  'GetByIdSoftSkillService',
+  GetByIdSoftSkillService,
+);
+
+// Companies
+container.registerSingleton<ICompanyRepositoryDTO>(
+  'CompanyRepository',
+  CompanyRepository,
+);
+container.registerSingleton<GetByIdCompanyService>(
+  'GetByIdCompanyService',
+  GetByIdCompanyService,
 );

@@ -1,10 +1,9 @@
-import { typeorm } from '@seidor-cloud-produtos/lib-seidor-common';
+import typeorm from '@seidor-cloud-produtos/typeorm';
 
 import Vacancy from '../infra/typeorm/entities/Vacancy';
-import IVacancyCreateDTO from '../dtos/IVacancyCreateDTO';
 
 export default interface IVacancyRepository {
-  create(vacancyData: IVacancyCreateDTO): Promise<Vacancy>;
+  create(vacancyData: Vacancy): Promise<Vacancy>;
   update(updates: Vacancy): Promise<Vacancy>;
   findById(id: string): Promise<Vacancy | undefined>;
   getAllWithPagination(

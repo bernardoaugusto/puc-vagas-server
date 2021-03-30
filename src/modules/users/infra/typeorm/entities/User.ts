@@ -5,9 +5,12 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   OneToMany,
+  ManyToMany,
+  JoinTable,
 } from 'typeorm';
 
 import { Exclude } from 'class-transformer';
+import Company from '@modules/companies/infra/typeorm/entities/Company';
 import UserToken from './UserToken';
 
 @Entity('users')
@@ -51,6 +54,10 @@ class User {
 
   @OneToMany(() => UserToken, user_token => user_token.user)
   user_token?: Array<UserToken>;
+
+  @ManyToMany(() => Company, company => company.users, { eager: true })
+  @JoinTable()
+  companies: Company[];
 }
 
 export default User;

@@ -12,7 +12,7 @@ export default class UsersAdminController {
       name,
       email,
       password,
-      confirmPassword,
+      confirm_password,
       identifier,
       phone_number,
     } = request.body;
@@ -23,7 +23,7 @@ export default class UsersAdminController {
       email,
       password,
       name,
-      confirmPassword,
+      confirm_password,
       identifier,
       phone_number,
     });

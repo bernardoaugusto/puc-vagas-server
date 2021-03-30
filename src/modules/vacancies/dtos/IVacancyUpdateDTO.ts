@@ -1,5 +1,5 @@
 export default interface IVacancyUpdateDTO {
-  desription?: string;
+  description?: string;
   title?: string;
   region?: string;
   salary_range?: string;
