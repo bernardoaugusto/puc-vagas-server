@@ -1,4 +1,5 @@
 import User from '@modules/users/infra/typeorm/entities/User';
+import Vacancy from '@modules/vacancies/infra/typeorm/entities/Vacancy';
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -6,6 +7,7 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   ManyToMany,
+  OneToMany,
 } from 'typeorm';
 
 @Entity('companies')
@@ -27,4 +29,7 @@ export default class Company {
 
   @ManyToMany(() => User, user => user.companies)
   users: User[];
+
+  @OneToMany(() => Vacancy, vacancy => vacancy.company)
+  vacancies: Vacancy[];
 }

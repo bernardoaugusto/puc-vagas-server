@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { celebrate, Segments } from 'celebrate';
 
+import ensureAuthenticated from '@modules/users/infra/http/middlewares/ensureAuthenticated';
 import configValidateRoute from '../../../../../config/route';
 import VacancyController from '../controllers/VacancyController';
 import createVacancySchema from '../../../common/validations/createVacancyValidator';
@@ -12,6 +13,7 @@ const vacancyController = new VacancyController();
 
 router.post(
   '/',
+  ensureAuthenticated,
   celebrate(
     {
       [Segments.BODY]: createVacancySchema,
@@ -23,6 +25,7 @@ router.post(
 
 router.get(
   '/:id',
+  ensureAuthenticated,
   celebrate(
     {
       [Segments.PARAMS]: validateIdSchema,
@@ -36,6 +39,7 @@ router.get('/', vacancyController.getAll);
 
 router.put(
   '/:id',
+  ensureAuthenticated,
   celebrate(
     {
       [Segments.BODY]: updateVacancySchema,
@@ -48,6 +52,7 @@ router.put(
 
 router.delete(
   '/:id',
+  ensureAuthenticated,
   celebrate(
     {
       [Segments.PARAMS]: validateIdSchema,
