@@ -1,4 +1,4 @@
-import ILikeDislikeVacancyDTO from '@modules/vacancies/dtos/ILikeDislikeVacancyDTO';
+import ILikeDislikeVacancyDTO from '@modules/users/dtos/ILikeDislikeVacancyDTO';
 import IVacancyLikeDislikeRepository from '@modules/users/repositories/IVacancyLikeDislikeRepository';
 import { getMongoRepository, MongoRepository } from 'typeorm';
 import UserLikeDislike from '../schemas/UserLikeDislike';

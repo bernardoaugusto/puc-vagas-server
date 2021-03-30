@@ -1,7 +1,7 @@
 import { Column, Entity, ObjectID, ObjectIdColumn } from 'typeorm';
 
 @Entity('vacancy-likes-dislikes-matches')
-export default class VacancyLikeDislike {
+export default class UserLikeDislike {
   @ObjectIdColumn()
   id: ObjectID;
 

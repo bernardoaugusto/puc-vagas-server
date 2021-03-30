@@ -1,5 +1,5 @@
 export default interface ILikeDislikeVacancyDTO {
-  user_id: string;
+  vacancy_id: string;
   likes: Array<string>;
   dislikes: Array<string>;
 }
