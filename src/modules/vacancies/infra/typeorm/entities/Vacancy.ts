@@ -43,7 +43,7 @@ export default class Vacancy {
   @Column({ type: 'uuid' })
   recruiter_id: string;
 
-  @ManyToOne(() => User)
+  @ManyToOne(() => User, user => user.vacancies)
   @JoinColumn({ name: 'recruiter_id' })
   recruiter?: User;
 }
