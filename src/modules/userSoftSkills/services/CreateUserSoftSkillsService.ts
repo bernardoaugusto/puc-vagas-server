@@ -6,15 +6,17 @@ import IUserSoftSkillsRepositoryDTO from '../repositories/IUserSoftSkillsReposit
 
 @injectable()
 export default class CreateUserSoftSkillsService {
-    constructor(
-        @inject('UserSoftSkillsRepository')
-        private userSoftSkillsRepository: IUserSoftSkillsRepositoryDTO,
-    ) {}
+  constructor(
+    @inject('UserSoftSkillsRepository')
+    private userSoftSkillsRepository: IUserSoftSkillsRepositoryDTO,
+  ) {}
 
-    public async execute(userSoftSkillsData: IUserSoftSkillsCreateDTO): Promise<UserSoftSkills> {
-        const userSoftSkills = new UserSoftSkills();
-        Object.assign(userSoftSkills, userSoftSkillsData);
+  public async execute(
+    userSoftSkillsData: IUserSoftSkillsCreateDTO,
+  ): Promise<UserSoftSkills> {
+    const userSoftSkills = new UserSoftSkills();
+    Object.assign(userSoftSkills, userSoftSkillsData);
 
-        return this.userSoftSkillsRepository.create(userSoftSkills);
-    }
+    return this.userSoftSkillsRepository.create(userSoftSkills);
+  }
 }

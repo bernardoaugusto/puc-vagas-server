@@ -28,6 +28,7 @@ import GetByIdCompanyService from '@modules/companies/services/GetByIdCompanySer
 import IUserSoftSkillsRepositoryDTO from '@modules/userSoftSkills/repositories/IUserSoftSkillsRepositoryDTO';
 import UserSoftSkillsRepository from '@modules/userSoftSkills/infra/typeorm/repositories/UserSoftSkillsRepository';
 import GetByIdUserSoftSkillsService from '@modules/userSoftSkills/services/GetByIdUserSoftSkillsService';
+import CreateUserSoftSkillsService from '@modules/userSoftSkills/services/CreateUserSoftSkillsService';
 
 container.registerSingleton<IUsersRepository>('UsersRepository', UserRepository);
 container.registerSingleton<IUsersTokenRepository>(
@@ -73,4 +74,8 @@ container.registerSingleton<IUserSoftSkillsRepositoryDTO>(
 container.registerSingleton<GetByIdUserSoftSkillsService>(
   'GetByIdUserSoftSkillsService',
   GetByIdUserSoftSkillsService,
+);
+container.registerSingleton<CreateUserSoftSkillsService>(
+  'CreateUserSoftSkillsService',
+  CreateUserSoftSkillsService,
 );

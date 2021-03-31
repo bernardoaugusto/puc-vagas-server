@@ -3,18 +3,10 @@ import { injectable, inject } from 'tsyringe';
 import AppError from '@shared/errors/AppError';
 
 import User from '@modules/users/infra/typeorm/entities/User';
+import CreateUserSoftSkillsService from '@modules/userSoftSkills/services/CreateUserSoftSkillsService';
 import IUsersRepository from '../repositories/IUsersRepository';
 import IHashProvider from '../providers/HashProvider/models/IHashProvider';
 import ICreateUserDTO from '../dtos/ICreateUserDTO';
-
-// interface IRequest {
-//   name: string;
-//   email: string;
-//   password: string;
-//   confirm_password: string;
-//   phone_number: string;
-//   identifier: string;
-// }
 
 @injectable()
 export default class CreateUserService {
@@ -24,6 +16,9 @@ export default class CreateUserService {
 
     @inject('HashProvider')
     private hashProvider: IHashProvider,
+
+    @inject('CreateUserSoftSkillsService')
+    private createUserSoftSkillsService: CreateUserSoftSkillsService,
   ) {}
 
   public async execute({
@@ -33,6 +28,7 @@ export default class CreateUserService {
     name,
     password,
     phone_number,
+    soft_skills,
   }: ICreateUserDTO): Promise<User> {
     if (password !== confirm_password) {
       throw new AppError('The password and this confirm does not match');
@@ -55,6 +51,17 @@ export default class CreateUserService {
       phone_number,
     });
 
-    return this.usersRepository.create(user);
+    const createdUser = await this.usersRepository.create(user);
+
+    if (soft_skills)
+      for (const softSkill of soft_skills) {
+        await this.createUserSoftSkillsService.execute({
+          user_id: createdUser.id,
+          soft_skill_id: softSkill.soft_skill_id,
+          stars: softSkill.stars,
+        });
+      }
+
+    return createdUser;
   }
 }
