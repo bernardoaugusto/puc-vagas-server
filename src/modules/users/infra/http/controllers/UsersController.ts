@@ -6,6 +6,8 @@ import { classToClass } from 'class-transformer';
 import UpdateUserService from '@modules/users/services/UpdateUserService';
 import InactivateUserService from '@modules/users/services/InactivateUserService';
 import CreateCompanyEmployeeService from '@modules/users/services/CreateCompanyEmployeeService';
+import LikeUserService from '@modules/users/services/LikeUserService';
+import DislikeUserService from '@modules/users/services/DislikeUserService';
 
 export default class UsersController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -76,5 +78,35 @@ export default class UsersController {
     });
 
     return response.json(classToClass(user_updated));
+  }
+
+  public async like(request: Request, response: Response): Promise<Response> {
+    const { id: user_liked_id } = request.params;
+    const { id: user_id } = request.user;
+    const { vacancy_id } = request.body;
+
+    const likeUserService = container.resolve(LikeUserService);
+
+    await likeUserService.execute(user_id, vacancy_id, user_liked_id);
+
+    return response.status(200).json({
+      vacancy_id,
+      user_id,
+    });
+  }
+
+  public async dislike(request: Request, response: Response): Promise<Response> {
+    const { id: user_liked_id } = request.params;
+    const { id: user_id } = request.user;
+    const { vacancy_id } = request.body;
+
+    const dislikeUserService = container.resolve(DislikeUserService);
+
+    await dislikeUserService.execute(user_id, vacancy_id, user_liked_id);
+
+    return response.status(200).json({
+      vacancy_id,
+      user_id,
+    });
   }
 }
