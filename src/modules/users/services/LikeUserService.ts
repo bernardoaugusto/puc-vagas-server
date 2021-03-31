@@ -4,6 +4,7 @@ import AppError from '@shared/errors/AppError';
 import IVacancyRepositoryDTO from '@modules/vacancies/repositories/IVacancyRepositoryDTO';
 import IVacancyLikeDislikeRepository from '@modules/vacancies/repositories/IVacancyLikeDislikeRepository';
 import IUsersRepository from '../repositories/IUsersRepository';
+import IUserLikeDislikeRepository from '../repositories/IUserLikeDislikeRepository';
 
 @injectable()
 export default class LikeUserService {
@@ -16,6 +17,9 @@ export default class LikeUserService {
 
     @inject('UsersRepository')
     private usersRepository: IUsersRepository,
+
+    @inject('UserLikeDislikeRepository')
+    private userLikeDislikeRepository: IUserLikeDislikeRepository,
   ) {}
 
   public async execute(
@@ -62,6 +66,24 @@ export default class LikeUserService {
     }
 
     has_register_of_vacancy.likes.push(check_user_liked_exists.id);
+
+    const has_register_of_user = await this.userLikeDislikeRepository.findByUserId(
+      user_id,
+    );
+
+    if (has_register_of_user) {
+      const has_match = has_register_of_user.likes.includes(vacancy_id);
+
+      if (has_match) {
+        // eslint-disable-next-line no-console
+        console.log('match');
+
+        has_register_of_user.matches.push(vacancy_id);
+        has_register_of_vacancy.matches.push(check_user_liked_exists.id);
+
+        await this.userLikeDislikeRepository.update(has_register_of_user);
+      }
+    }
 
     await this.vacancyLikeDislikeRepository.update(has_register_of_vacancy);
   }

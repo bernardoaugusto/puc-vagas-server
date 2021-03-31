@@ -3,6 +3,7 @@ import { inject, injectable } from 'tsyringe';
 import AppError from '@shared/errors/AppError';
 import IUserLikeDislikeRepository from '@modules/users/repositories/IUserLikeDislikeRepository';
 import IVacancyRepositoryDTO from '../repositories/IVacancyRepositoryDTO';
+import IVacancyLikeDislikeRepository from '../repositories/IVacancyLikeDislikeRepository';
 
 @injectable()
 export default class LikeVacancyService {
@@ -12,6 +13,9 @@ export default class LikeVacancyService {
 
     @inject('UserLikeDislikeRepository')
     private userLikeDislikeRepository: IUserLikeDislikeRepository,
+
+    @inject('VacancyLikeDislikeRepository')
+    private vacancyLikeDislikeRepository: IVacancyLikeDislikeRepository,
   ) {}
 
   public async execute(user_id: string, vacancy_id: string): Promise<void> {
@@ -39,6 +43,25 @@ export default class LikeVacancyService {
       has_register_of_user.dislikes.includes(vacancy_id)
     ) {
       throw new AppError(`You already reacted to this vacancy`);
+    }
+
+    const has_register_of_vacancy = await this.vacancyLikeDislikeRepository.findByVacancyId(
+      vacancy_id,
+    );
+
+    if (has_register_of_vacancy) {
+      const has_match = has_register_of_vacancy.likes.includes(vacancy_id);
+
+      if (has_match) {
+        // eslint-disable-next-line no-console
+        console.log('match');
+
+        has_register_of_vacancy.matches.push(user_id);
+
+        has_register_of_user.matches.push(vacancy_exists.id);
+
+        await this.vacancyLikeDislikeRepository.update(has_register_of_vacancy);
+      }
     }
 
     has_register_of_user.likes.push(vacancy_exists.id);
