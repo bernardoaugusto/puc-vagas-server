@@ -49,6 +49,8 @@ import VacancyLikeDislikeRepository from '@modules/vacancies/infra/typeorm/repos
 import IUserLikeDislikeRepository from '@modules/users/repositories/IUserLikeDislikeRepository';
 import UserLikeDislikeRepository from '@modules/users/infra/typeorm/repositories/UserLikeDislikeRepository';
 import IChatRepository from '@modules/chats/repositories/IChatRepository';
+
+// Chat
 import ChatRepository from '@modules/chats/infra/typeorm/repositories/ChatRepository';
 
 container.registerSingleton<IUsersRepository>('UsersRepository', UserRepository);
@@ -137,4 +139,5 @@ container.registerSingleton<IUserLikeDislikeRepository>(
   UserLikeDislikeRepository,
 );
 
+// Chat
 container.registerSingleton<IChatRepository>('ChatRepository', ChatRepository);
