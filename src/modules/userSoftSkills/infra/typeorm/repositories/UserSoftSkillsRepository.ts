@@ -21,6 +21,13 @@ export default class UserSoftSkillsRepository implements IUserSoftSkillsReposito
     return this.ormRepository.findOne({ where: { id } });
   }
 
+  public async findByUserIdAndSoftSkillSd(
+    user_id: string,
+    soft_skill_id: string,
+  ): Promise<UserSoftSkills | undefined> {
+    return this.ormRepository.findOne({ where: { user_id, soft_skill_id } });
+  }
+
   public async update(updates: UserSoftSkills): Promise<UserSoftSkills> {
     return this.ormRepository.save(updates);
   }
