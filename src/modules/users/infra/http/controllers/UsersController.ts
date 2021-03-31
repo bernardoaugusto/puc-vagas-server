@@ -19,6 +19,7 @@ export default class UsersController {
       confirm_password,
       phone_number,
       soft_skills,
+      work_areas,
     } = request.body;
 
     const createUserService = container.resolve(CreateUserService);
@@ -31,6 +32,7 @@ export default class UsersController {
       confirm_password,
       phone_number,
       soft_skills,
+      work_areas,
     });
 
     return response.status(201).json(classToClass(user_created));

@@ -12,4 +12,5 @@ export default interface ICreateUserDTO {
     soft_skill_id: string;
     stars: number;
   }>;
+  work_areas?: Array<string>;
 }
