@@ -15,6 +15,11 @@ import ISoftSkillRepositoryDTO from '@modules/softSkills/repositories/ISoftSkill
 import SoftSkillRepository from '@modules/softSkills/infra/typeorm/repositories/SoftSkillRepository';
 import GetByIdSoftSkillService from '@modules/softSkills/services/GetByIdSoftSkillService';
 
+// Work Areas
+import IWorkAreasRepositoryDTO from '@modules/workAreas/repositories/IWorkAreasRepositoryDTO';
+import WorkAreasRepository from '@modules/workAreas/infra/typeorm/repositories/WorkAreasRepository';
+import GetByIdWorkAreasService from '@modules/workAreas/services/GetByIdWorkAreasService';
+
 // Vacancies
 import IVacancyRepositoryDTO from '@modules/vacancies/repositories/IVacancyRepositoryDTO';
 import GetByIdVacancyService from '@modules/vacancies/services/GetByIdVacancyService';
@@ -68,6 +73,16 @@ container.registerSingleton<ISoftSkillRepositoryDTO>(
 container.registerSingleton<GetByIdSoftSkillService>(
   'GetByIdSoftSkillService',
   GetByIdSoftSkillService,
+);
+
+// Work Areas
+container.registerSingleton<IWorkAreasRepositoryDTO>(
+  'WorkAreasRepository',
+  WorkAreasRepository,
+);
+container.registerSingleton<GetByIdWorkAreasService>(
+  'GetByIdWorkAreasService',
+  GetByIdWorkAreasService,
 );
 
 // Companies
