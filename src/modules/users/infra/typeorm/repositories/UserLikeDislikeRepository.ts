@@ -23,12 +23,10 @@ export default class UserLikeDislikeRepository
     return this.ormRepository.save(data);
   }
 
-  public async findByUserId(
-    vacancy_id: string,
-  ): Promise<UserLikeDislike | undefined> {
+  public async findByUserId(user_id: string): Promise<UserLikeDislike | undefined> {
     return this.ormRepository.findOne({
       where: {
-        vacancy_id,
+        user_id,
       },
     });
   }

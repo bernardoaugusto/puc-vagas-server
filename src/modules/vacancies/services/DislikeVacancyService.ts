@@ -5,7 +5,7 @@ import IUserLikeDislikeRepository from '@modules/users/repositories/IUserLikeDis
 import IVacancyRepositoryDTO from '../repositories/IVacancyRepositoryDTO';
 
 @injectable()
-export default class LikeVacancyService {
+export default class DisikeVacancyService {
   constructor(
     @inject('VacancyRepository')
     private vacancyRepository: IVacancyRepositoryDTO,
@@ -41,7 +41,7 @@ export default class LikeVacancyService {
       throw new AppError(`You already reacted to this vacancy`);
     }
 
-    has_register_of_user.likes.push(vacancy_exists.id);
+    has_register_of_user.dislikes.push(vacancy_exists.id);
 
     await this.userLikeDislikeRepository.update(has_register_of_user);
   }

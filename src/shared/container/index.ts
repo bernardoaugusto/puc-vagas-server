@@ -23,10 +23,10 @@ import GetByIdVacancyService from '@modules/vacancies/services/GetByIdVacancySer
 import ICompanyRepositoryDTO from '@modules/companies/repositories/ICompanyRepositoryDTO';
 import CompanyRepository from '@modules/companies/infra/typeorm/repositories/CompanyRepository';
 import GetByIdCompanyService from '@modules/companies/services/GetByIdCompanyService';
-import IVacancyLikeDislikeRepository from '@modules/users/repositories/IVacancyLikeDislikeRepository';
-import VacancyLikeDislikeRepository from '@modules/users/infra/typeorm/repositories/VacancyLikeDislikeRepository';
-import IUserLikeDislikeRepository from '@modules/vacancies/repositories/IUserLikeDislikeRepository';
-import UserLikeDislikeRepository from '@modules/vacancies/infra/typeorm/repositories/UserLikeDislikeRepository';
+import IVacancyLikeDislikeRepository from '@modules/vacancies/repositories/IVacancyLikeDislikeRepository';
+import VacancyLikeDislikeRepository from '@modules/vacancies/infra/typeorm/repositories/VacancyLikeDislikeRepository';
+import IUserLikeDislikeRepository from '@modules/users/repositories/IUserLikeDislikeRepository';
+import UserLikeDislikeRepository from '@modules/users/infra/typeorm/repositories/UserLikeDislikeRepository';
 
 container.registerSingleton<IUsersRepository>('UsersRepository', UserRepository);
 container.registerSingleton<IUsersTokenRepository>(
