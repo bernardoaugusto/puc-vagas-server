@@ -14,5 +14,5 @@ export default {
       }),
     )
     .optional(),
-  work_areas: Joi.array().items(Joi.string().uuid().required()).optional(),
+  work_areas_ids: Joi.array().items(Joi.string().uuid().required()).optional(),
 };

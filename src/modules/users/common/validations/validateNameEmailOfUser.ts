@@ -24,7 +24,7 @@ export const validateDataOfCreateUser = {
       }),
     )
     .optional(),
-  work_areas: Joi.array().items(Joi.string().uuid().required()).optional(),
+  work_areas_ids: Joi.array().items(Joi.string().uuid().required()).optional(),
 };
 
 export const validateId = {
