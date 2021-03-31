@@ -34,7 +34,7 @@ export default class CreateUserService {
     password,
     phone_number,
     soft_skills,
-    work_areas,
+    work_areas_ids,
   }: ICreateUserDTO): Promise<User> {
     if (password !== confirm_password)
       throw new AppError('The password and this confirm does not match');
@@ -54,13 +54,13 @@ export default class CreateUserService {
       phone_number,
     });
 
-    if (work_areas) {
+    if (work_areas_ids) {
       const getWorkAreas: Array<WorkAreas> = [];
-      for (const idWorkAreas of work_areas) {
+      for (const idWorkAreas of work_areas_ids) {
         getWorkAreas.push(await this.getByIdWorkAreasService.execute(idWorkAreas));
       }
 
-      if (getWorkAreas.length !== work_areas.length)
+      if (getWorkAreas.length !== work_areas_ids.length)
         throw new AppError('There are unregistered work areas');
 
       user.work_areas = getWorkAreas;

@@ -9,4 +9,5 @@ export default interface IVacancyCreateDTO {
     soft_skill_id: string;
     stars: number;
   }>;
+  work_areas_ids?: Array<string>;
 }
