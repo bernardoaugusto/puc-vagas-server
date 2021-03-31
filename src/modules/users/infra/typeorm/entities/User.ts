@@ -13,6 +13,7 @@ import { Exclude } from 'class-transformer';
 import Company from '@modules/companies/infra/typeorm/entities/Company';
 import Vacancy from '@modules/vacancies/infra/typeorm/entities/Vacancy';
 import UserSoftSkills from '@modules/userSoftSkills/infra/typeorm/entities/UserSoftSkills';
+import WorkAreas from '@modules/workAreas/infra/typeorm/entities/WorkAreas';
 import UserToken from './UserToken';
 
 @Entity('users')
@@ -66,6 +67,10 @@ class User {
 
   @OneToMany(() => UserSoftSkills, userSoftSkills => userSoftSkills.user)
   user_soft_skills: UserSoftSkills[];
+
+  @ManyToMany(() => WorkAreas, workAreas => workAreas.users, { eager: true })
+  @JoinTable()
+  work_areas: WorkAreas[];
 }
 
 export default User;

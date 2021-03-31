@@ -19,11 +19,12 @@ export const validateDataOfCreateUser = {
   soft_skills: Joi.array()
     .items(
       Joi.object({
-        soft_skill_id: Joi.string().required(),
+        soft_skill_id: Joi.string().uuid().required(),
         stars: Joi.number().required(),
       }),
     )
     .optional(),
+  work_areas_ids: Joi.array().items(Joi.string().uuid().required()).optional(),
 };
 
 export const validateId = {

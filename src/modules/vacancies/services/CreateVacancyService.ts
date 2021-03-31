@@ -5,6 +5,8 @@ import IUsersRepository from '@modules/users/repositories/IUsersRepository';
 import GetByIdCompanyService from '@modules/companies/services/GetByIdCompanyService';
 import User from '@modules/users/infra/typeorm/entities/User';
 import CreateVacancySoftSkillsService from '@modules/vacancySoftSkills/services/CreateVacancySoftSkillsService';
+import GetByIdWorkAreasService from '@modules/workAreas/services/GetByIdWorkAreasService';
+import WorkAreas from '@modules/workAreas/infra/typeorm/entities/WorkAreas';
 import Vacancy from '../infra/typeorm/entities/Vacancy';
 import IVacancyCreateDTO from '../dtos/IVacancyCreateDTO';
 import IVacancyRepositoryDTO from '../repositories/IVacancyRepositoryDTO';
@@ -23,6 +25,9 @@ export default class CreateVacancyService {
 
     @inject('CreateVacancySoftSkillsService')
     private createVacancySoftSkillsService: CreateVacancySoftSkillsService,
+
+    @inject('GetByIdWorkAreasService')
+    private getByIdWorkAreasService: GetByIdWorkAreasService,
   ) {}
 
   public async execute(
@@ -49,6 +54,18 @@ export default class CreateVacancyService {
 
     const vacancy = new Vacancy();
     Object.assign(vacancy, { ...vacancyData, recruiter_id: recruiter.id });
+
+    if (vacancyData.work_areas_ids) {
+      const getWorkAreas: Array<WorkAreas> = [];
+      for (const idWorkAreas of vacancyData.work_areas_ids) {
+        getWorkAreas.push(await this.getByIdWorkAreasService.execute(idWorkAreas));
+      }
+
+      if (getWorkAreas.length !== vacancyData.work_areas_ids.length)
+        throw new AppError('There are unregistered work areas');
+
+      vacancy.work_areas = getWorkAreas;
+    }
 
     const createdVacancy = await this.vacancyRepository.create(vacancy);
 
