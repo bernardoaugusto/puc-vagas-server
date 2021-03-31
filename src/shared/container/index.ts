@@ -48,10 +48,15 @@ import VacancyLikeDislikeRepository from '@modules/vacancies/infra/typeorm/repos
 // UserLike
 import IUserLikeDislikeRepository from '@modules/users/repositories/IUserLikeDislikeRepository';
 import UserLikeDislikeRepository from '@modules/users/infra/typeorm/repositories/UserLikeDislikeRepository';
-import IChatRepository from '@modules/chats/repositories/IChatRepository';
 
 // Chat
+import IChatRepository from '@modules/chats/repositories/IChatRepository';
 import ChatRepository from '@modules/chats/infra/typeorm/repositories/ChatRepository';
+
+// Hard Skills
+import IHardSkillsRepositoryDTO from '@modules/hardSkills/repositories/IHardSkillsRepositoryDTO';
+import HardSkillsRepository from '@modules/hardSkills/infra/typeorm/repositories/HardSkillsRepository';
+import GetByIdHardSkillsService from '@modules/hardSkills/services/GetByIdHardSkillsService';
 
 container.registerSingleton<IUsersRepository>('UsersRepository', UserRepository);
 container.registerSingleton<IUsersTokenRepository>(
@@ -141,3 +146,13 @@ container.registerSingleton<IUserLikeDislikeRepository>(
 
 // Chat
 container.registerSingleton<IChatRepository>('ChatRepository', ChatRepository);
+
+// Hard Skills
+container.registerSingleton<IHardSkillsRepositoryDTO>(
+  'HardSkillsRepository',
+  HardSkillsRepository,
+);
+container.registerSingleton<GetByIdHardSkillsService>(
+  'GetByIdHardSkillsService',
+  GetByIdHardSkillsService,
+);
