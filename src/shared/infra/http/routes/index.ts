@@ -22,6 +22,6 @@ routes.use('/api/soft-skills ', ensureAuthenticated, softSkillsRouter);
 routes.use('/api/vacancies', ensureAuthenticated, vacanciesRouter);
 routes.use('/api/companies', ensureAuthenticated, companiesRouter);
 routes.use('/api/user-soft-skills', ensureAuthenticated, userSoftSkills);
-routes.use('/api/user-soft-skills', ensureAuthenticated, vacancySoftSkills);
+routes.use('/api/vacancy-soft-skills', ensureAuthenticated, vacancySoftSkills);
 
 export default routes;
