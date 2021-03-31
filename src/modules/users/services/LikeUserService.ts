@@ -59,8 +59,8 @@ export default class LikeUserService {
     }
 
     if (
-      has_register_of_vacancy.likes.includes(vacancy_id) ||
-      has_register_of_vacancy.dislikes.includes(vacancy_id)
+      has_register_of_vacancy.likes.includes(check_user_liked_exists.id) ||
+      has_register_of_vacancy.dislikes.includes(check_user_liked_exists.id)
     ) {
       throw new AppError(`You already reacted to this user`);
     }

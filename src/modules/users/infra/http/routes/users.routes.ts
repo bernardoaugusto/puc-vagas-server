@@ -74,7 +74,7 @@ usersRouter.put(
   usersController.companyEmployee,
 );
 
-usersRouter.post('/like/:id', usersController.like);
-usersRouter.post('/dislike/:id', usersController.dislike);
+usersRouter.post('/like/:id', ensureAuthenticated, usersController.like);
+usersRouter.post('/dislike/:id', ensureAuthenticated, usersController.dislike);
 
 export default usersRouter;

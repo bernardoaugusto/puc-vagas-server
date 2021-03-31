@@ -50,7 +50,7 @@ export default class LikeVacancyService {
     );
 
     if (has_register_of_vacancy) {
-      const has_match = has_register_of_vacancy.likes.includes(vacancy_id);
+      const has_match = has_register_of_vacancy.likes.includes(user_id);
 
       if (has_match) {
         // eslint-disable-next-line no-console
