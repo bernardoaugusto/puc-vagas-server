@@ -15,10 +15,10 @@ export default class VacancySoftSkills {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
+  @Column({ type: 'uuid' })
   vacancy_id: string;
 
-  @Column()
+  @Column({ type: 'uuid' })
   soft_skill_id: string;
 
   @Column()

@@ -57,6 +57,7 @@ import ChatRepository from '@modules/chats/infra/typeorm/repositories/ChatReposi
 import IHardSkillsRepositoryDTO from '@modules/hardSkills/repositories/IHardSkillsRepositoryDTO';
 import HardSkillsRepository from '@modules/hardSkills/infra/typeorm/repositories/HardSkillsRepository';
 import GetByIdHardSkillsService from '@modules/hardSkills/services/GetByIdHardSkillsService';
+import CreateHardSkillsService from '@modules/hardSkills/services/CreateHardSkillsService';
 
 container.registerSingleton<IUsersRepository>('UsersRepository', UserRepository);
 container.registerSingleton<IUsersTokenRepository>(
@@ -151,6 +152,10 @@ container.registerSingleton<IChatRepository>('ChatRepository', ChatRepository);
 container.registerSingleton<IHardSkillsRepositoryDTO>(
   'HardSkillsRepository',
   HardSkillsRepository,
+);
+container.registerSingleton<CreateHardSkillsService>(
+  'CreateHardSkillsService',
+  CreateHardSkillsService,
 );
 container.registerSingleton<GetByIdHardSkillsService>(
   'GetByIdHardSkillsService',
