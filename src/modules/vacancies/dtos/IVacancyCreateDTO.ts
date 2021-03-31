@@ -5,4 +5,8 @@ export default interface IVacancyCreateDTO {
 
   region?: string;
   salary_range?: string;
+  soft_skills?: Array<{
+    soft_skill_id: string;
+    stars: number;
+  }>;
 }

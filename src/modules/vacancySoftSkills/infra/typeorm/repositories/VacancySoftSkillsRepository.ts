@@ -24,6 +24,13 @@ export default class VacancySoftSkillsRepository
     return this.ormRepository.findOne({ where: { id } });
   }
 
+  public async findByVacancyIdAndSoftSkillSd(
+    vacancy_id: string,
+    soft_skill_id: string,
+  ): Promise<VacancySoftSkills | undefined> {
+    return this.ormRepository.findOne({ where: { vacancy_id, soft_skill_id } });
+  }
+
   public async update(updates: VacancySoftSkills): Promise<VacancySoftSkills> {
     return this.ormRepository.save(updates);
   }
