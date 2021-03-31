@@ -1,5 +1,6 @@
 import Company from '@modules/companies/infra/typeorm/entities/Company';
 import User from '@modules/users/infra/typeorm/entities/User';
+import VacancySoftSkills from '@modules/vacancySoftSkills/infra/typeorm/entities/VacancySoftSkills';
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -8,6 +9,7 @@ import {
   UpdateDateColumn,
   ManyToOne,
   JoinColumn,
+  OneToMany,
 } from 'typeorm';
 
 @Entity('vacancies')
@@ -46,4 +48,7 @@ export default class Vacancy {
   @ManyToOne(() => User, user => user.vacancies)
   @JoinColumn({ name: 'recruiter_id' })
   recruiter?: User;
+
+  @OneToMany(() => VacancySoftSkills, vacancySoftSkills => vacancySoftSkills.vacancy)
+  vacancy_soft_skills: VacancySoftSkills[];
 }

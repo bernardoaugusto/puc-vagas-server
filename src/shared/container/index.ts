@@ -23,16 +23,26 @@ import GetByIdVacancyService from '@modules/vacancies/services/GetByIdVacancySer
 import ICompanyRepositoryDTO from '@modules/companies/repositories/ICompanyRepositoryDTO';
 import CompanyRepository from '@modules/companies/infra/typeorm/repositories/CompanyRepository';
 import GetByIdCompanyService from '@modules/companies/services/GetByIdCompanyService';
-import IVacancyLikeDislikeRepository from '@modules/vacancies/repositories/IVacancyLikeDislikeRepository';
-import VacancyLikeDislikeRepository from '@modules/vacancies/infra/typeorm/repositories/VacancyLikeDislikeRepository';
-import IUserLikeDislikeRepository from '@modules/users/repositories/IUserLikeDislikeRepository';
-import UserLikeDislikeRepository from '@modules/users/infra/typeorm/repositories/UserLikeDislikeRepository';
 
 // UserSoftSkills
 import IUserSoftSkillsRepositoryDTO from '@modules/userSoftSkills/repositories/IUserSoftSkillsRepositoryDTO';
 import UserSoftSkillsRepository from '@modules/userSoftSkills/infra/typeorm/repositories/UserSoftSkillsRepository';
 import GetByIdUserSoftSkillsService from '@modules/userSoftSkills/services/GetByIdUserSoftSkillsService';
 import CreateUserSoftSkillsService from '@modules/userSoftSkills/services/CreateUserSoftSkillsService';
+
+// VacancySoftSkills
+import IVacancySoftSkillsRepositoryDTO from '@modules/vacancySoftSkills/repositories/IVacancySoftSkillsRepositoryDTO';
+import VacancySoftSkillsRepository from '@modules/vacancySoftSkills/infra/typeorm/repositories/VacancySoftSkillsRepository';
+import GetByIdVacancySoftSkillsService from '@modules/vacancySoftSkills/services/GetByIdVacancySoftSkillsService';
+import CreateVacancySoftSkillsService from '@modules/vacancySoftSkills/services/CreateVacancySoftSkillsService';
+
+// VacancyLike
+import IVacancyLikeDislikeRepository from '@modules/vacancies/repositories/IVacancyLikeDislikeRepository';
+import VacancyLikeDislikeRepository from '@modules/vacancies/infra/typeorm/repositories/VacancyLikeDislikeRepository';
+
+// UserLike
+import IUserLikeDislikeRepository from '@modules/users/repositories/IUserLikeDislikeRepository';
+import UserLikeDislikeRepository from '@modules/users/infra/typeorm/repositories/UserLikeDislikeRepository';
 
 container.registerSingleton<IUsersRepository>('UsersRepository', UserRepository);
 container.registerSingleton<IUsersTokenRepository>(
@@ -83,11 +93,28 @@ container.registerSingleton<CreateUserSoftSkillsService>(
   'CreateUserSoftSkillsService',
   CreateUserSoftSkillsService,
 );
+
+// VacancySoftSkills
+container.registerSingleton<IVacancySoftSkillsRepositoryDTO>(
+  'VacancySoftSkillsRepository',
+  VacancySoftSkillsRepository,
+);
+container.registerSingleton<GetByIdVacancySoftSkillsService>(
+  'GetByIdVacancySoftSkillsService',
+  GetByIdVacancySoftSkillsService,
+);
+container.registerSingleton<CreateVacancySoftSkillsService>(
+  'CreateVacancySoftSkillsService',
+  CreateVacancySoftSkillsService,
+);
+
+// VacancyLike
 container.registerSingleton<IVacancyLikeDislikeRepository>(
   'VacancyLikeDislikeRepository',
   VacancyLikeDislikeRepository,
 );
 
+// UserLike
 container.registerSingleton<IUserLikeDislikeRepository>(
   'UserLikeDislikeRepository',
   UserLikeDislikeRepository,

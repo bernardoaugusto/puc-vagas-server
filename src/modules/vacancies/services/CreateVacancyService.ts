@@ -4,6 +4,7 @@ import AppError from '@shared/errors/AppError';
 import IUsersRepository from '@modules/users/repositories/IUsersRepository';
 import GetByIdCompanyService from '@modules/companies/services/GetByIdCompanyService';
 import User from '@modules/users/infra/typeorm/entities/User';
+import CreateVacancySoftSkillsService from '@modules/vacancySoftSkills/services/CreateVacancySoftSkillsService';
 import Vacancy from '../infra/typeorm/entities/Vacancy';
 import IVacancyCreateDTO from '../dtos/IVacancyCreateDTO';
 import IVacancyRepositoryDTO from '../repositories/IVacancyRepositoryDTO';
@@ -19,6 +20,9 @@ export default class CreateVacancyService {
 
     @inject('GetByIdCompanyService')
     private getByIdCompanyService: GetByIdCompanyService,
+
+    @inject('CreateVacancySoftSkillsService')
+    private createVacancySoftSkillsService: CreateVacancySoftSkillsService,
   ) {}
 
   public async execute(
@@ -46,6 +50,17 @@ export default class CreateVacancyService {
     const vacancy = new Vacancy();
     Object.assign(vacancy, { ...vacancyData, recruiter_id: recruiter.id });
 
-    return this.vacancyRepository.create(vacancy);
+    const createdVacancy = await this.vacancyRepository.create(vacancy);
+
+    if (vacancyData.soft_skills)
+      for (const softSkill of vacancyData.soft_skills) {
+        await this.createVacancySoftSkillsService.execute({
+          vacancy_id: createdVacancy.id,
+          soft_skill_id: softSkill.soft_skill_id,
+          stars: softSkill.stars,
+        });
+      }
+
+    return createdVacancy;
   }
 }
