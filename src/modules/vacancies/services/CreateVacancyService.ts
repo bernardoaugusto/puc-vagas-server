@@ -7,6 +7,7 @@ import User from '@modules/users/infra/typeorm/entities/User';
 import CreateVacancySoftSkillsService from '@modules/vacancySoftSkills/services/CreateVacancySoftSkillsService';
 import GetByIdWorkAreasService from '@modules/workAreas/services/GetByIdWorkAreasService';
 import WorkAreas from '@modules/workAreas/infra/typeorm/entities/WorkAreas';
+import CreateHardSkillsService from '@modules/hardSkills/services/CreateHardSkillsService';
 import Vacancy from '../infra/typeorm/entities/Vacancy';
 import IVacancyCreateDTO from '../dtos/IVacancyCreateDTO';
 import IVacancyRepositoryDTO from '../repositories/IVacancyRepositoryDTO';
@@ -28,6 +29,9 @@ export default class CreateVacancyService {
 
     @inject('GetByIdWorkAreasService')
     private getByIdWorkAreasService: GetByIdWorkAreasService,
+
+    @inject('CreateHardSkillsService')
+    private createHardSkillsService: CreateHardSkillsService,
   ) {}
 
   public async execute(
@@ -78,6 +82,13 @@ export default class CreateVacancyService {
         });
       }
 
-    return createdVacancy;
+    for (const hard_skills of vacancyData.hard_skills) {
+      await this.createHardSkillsService.execute({
+        ...hard_skills,
+        vacancy_id: createdVacancy.id,
+      });
+    }
+
+    return (await this.vacancyRepository.findById(createdVacancy.id)) as Vacancy;
   }
 }

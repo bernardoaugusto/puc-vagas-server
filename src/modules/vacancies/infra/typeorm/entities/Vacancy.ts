@@ -1,4 +1,5 @@
 import Company from '@modules/companies/infra/typeorm/entities/Company';
+import HardSkills from '@modules/hardSkills/infra/typeorm/entities/HardSkills';
 import User from '@modules/users/infra/typeorm/entities/User';
 import VacancySoftSkills from '@modules/vacancySoftSkills/infra/typeorm/entities/VacancySoftSkills';
 import WorkAreas from '@modules/workAreas/infra/typeorm/entities/WorkAreas';
@@ -58,4 +59,7 @@ export default class Vacancy {
   @ManyToMany(() => WorkAreas, workAreas => workAreas.vacancy, { eager: true })
   @JoinTable()
   work_areas: WorkAreas[];
+
+  @OneToMany(() => HardSkills, hardSkills => hardSkills.vacancy, { eager: true })
+  hard_skills: HardSkills[];
 }
