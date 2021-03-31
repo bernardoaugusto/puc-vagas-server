@@ -18,12 +18,12 @@ module.exports = [
     {
       name: "mongo",
       type : "mongodb",
-      host : process.env.MONGO_HOST || 'localhost',
-      port : process.env.MONGO_PORT || 27017,
-      database : process.env.MONGO_DBNAME || 'tindev',
+      host : 'localhost',
+      port :  27017,
+      database : 'tindev',
       useUnifiedTopology: true,
-      schemas : [
-        `./${process.env.NODE_ENV === 'production' ? 'dist' : 'src'}/modules/**/infra/typeorm/schemas/*.{ts,js}`
+      entities : [
+        `src/modules/**/infra/typeorm/schemas/*.ts`
       ]
     }
 ];

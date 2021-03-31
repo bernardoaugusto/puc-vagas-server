@@ -8,6 +8,7 @@ import IUsersRepository from '@modules/users/repositories/IUsersRepository';
 import UserRepository from '@modules/users/infra/typeorm/repositories/UsersRepository';
 import IUsersTokenRepository from '@modules/users/repositories/IUsersTokenRepository';
 import UsersTokensRepository from '@modules/users/infra/typeorm/repositories/UsersTokensRepository';
+import VacancyRepository from '@modules/vacancies/infra/typeorm/repositories/VacancyRepository';
 
 // Soft Skills
 import ISoftSkillRepositoryDTO from '@modules/softSkills/repositories/ISoftSkillRepositoryDTO';
@@ -16,13 +17,16 @@ import GetByIdSoftSkillService from '@modules/softSkills/services/GetByIdSoftSki
 
 // Vacancies
 import IVacancyRepositoryDTO from '@modules/vacancies/repositories/IVacancyRepositoryDTO';
-import VacancyRepository from '@modules/vacancies/infra/typeorm/repositories/VacancyRepository';
 import GetByIdVacancyService from '@modules/vacancies/services/GetByIdVacancyService';
 
 // Companies
 import ICompanyRepositoryDTO from '@modules/companies/repositories/ICompanyRepositoryDTO';
 import CompanyRepository from '@modules/companies/infra/typeorm/repositories/CompanyRepository';
 import GetByIdCompanyService from '@modules/companies/services/GetByIdCompanyService';
+import IVacancyLikeDislikeRepository from '@modules/vacancies/repositories/IVacancyLikeDislikeRepository';
+import VacancyLikeDislikeRepository from '@modules/vacancies/infra/typeorm/repositories/VacancyLikeDislikeRepository';
+import IUserLikeDislikeRepository from '@modules/users/repositories/IUserLikeDislikeRepository';
+import UserLikeDislikeRepository from '@modules/users/infra/typeorm/repositories/UserLikeDislikeRepository';
 
 // UserSoftSkills
 import IUserSoftSkillsRepositoryDTO from '@modules/userSoftSkills/repositories/IUserSoftSkillsRepositoryDTO';
@@ -78,4 +82,13 @@ container.registerSingleton<GetByIdUserSoftSkillsService>(
 container.registerSingleton<CreateUserSoftSkillsService>(
   'CreateUserSoftSkillsService',
   CreateUserSoftSkillsService,
+);
+container.registerSingleton<IVacancyLikeDislikeRepository>(
+  'VacancyLikeDislikeRepository',
+  VacancyLikeDislikeRepository,
+);
+
+container.registerSingleton<IUserLikeDislikeRepository>(
+  'UserLikeDislikeRepository',
+  UserLikeDislikeRepository,
 );
