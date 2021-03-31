@@ -53,7 +53,7 @@ export default class CreateVacancyService {
       company => company.id === companyFinded.id,
     );
 
-    if (registeredRecruiter)
+    if (!registeredRecruiter)
       throw new AppError('The recruiter is already working at this company', 400);
 
     const vacancy = new Vacancy();
