@@ -1,10 +1,10 @@
 import ILikeDislikeVacancyDTO from '@modules/users/dtos/ILikeDislikeVacancyDTO';
-import IVacancyLikeDislikeRepository from '@modules/users/repositories/IVacancyLikeDislikeRepository';
+import IUserLikeDislikeRepository from '@modules/users/repositories/IUserLikeDislikeRepository';
 import { getMongoRepository, MongoRepository } from 'typeorm';
 import UserLikeDislike from '../schemas/UserLikeDislike';
 
-export default class VacancyLikeDislikeRepository
-  implements IVacancyLikeDislikeRepository {
+export default class UserLikeDislikeRepository
+  implements IUserLikeDislikeRepository {
   private ormRepository: MongoRepository<UserLikeDislike>;
 
   constructor() {
@@ -23,12 +23,10 @@ export default class VacancyLikeDislikeRepository
     return this.ormRepository.save(data);
   }
 
-  public async findByUserId(
-    vacancy_id: string,
-  ): Promise<UserLikeDislike | undefined> {
+  public async findByUserId(user_id: string): Promise<UserLikeDislike | undefined> {
     return this.ormRepository.findOne({
       where: {
-        vacancy_id,
+        user_id,
       },
     });
   }
