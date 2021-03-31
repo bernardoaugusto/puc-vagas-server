@@ -4,7 +4,12 @@ export default interface ICreateUserDTO {
   password: string;
   phone_number: string;
   identifier: string;
+  confirm_password: string;
 
   is_contractor?: boolean;
   is_teacher?: boolean;
+  soft_skills?: Array<{
+    soft_skill_id: string;
+    stars: number;
+  }>;
 }

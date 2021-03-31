@@ -16,6 +16,14 @@ export const validateUserData = {
 export const validateDataOfCreateUser = {
   ...validateUserData,
   confirm_password: Joi.string().required(),
+  soft_skills: Joi.array()
+    .items(
+      Joi.object({
+        soft_skill_id: Joi.string().required(),
+        stars: Joi.number().required(),
+      }),
+    )
+    .optional(),
 };
 
 export const validateId = {
