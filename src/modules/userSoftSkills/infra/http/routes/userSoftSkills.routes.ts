@@ -11,50 +11,50 @@ const router = Router();
 const userSoftSkillsController = new UserSoftSkillsController();
 
 router.post(
-    '/',
-    celebrate(
-        {
-            [Segments.BODY]: createUserSoftSkillsSchema,
-        },
-        configValidateRoute,
-    ),
-    userSoftSkillsController.create,
+  '/',
+  celebrate(
+    {
+      [Segments.BODY]: createUserSoftSkillsSchema,
+    },
+    configValidateRoute,
+  ),
+  userSoftSkillsController.create,
 );
 
 router.get(
-    '/:id',
-    celebrate(
-        {
-            [Segments.PARAMS]: validateIdSchema,
-        },
-        configValidateRoute,
-    ),
-    userSoftSkillsController.getById,
+  '/:id',
+  celebrate(
+    {
+      [Segments.PARAMS]: validateIdSchema,
+    },
+    configValidateRoute,
+  ),
+  userSoftSkillsController.getById,
 );
 
 router.get('/', userSoftSkillsController.getAll);
 
 router.put(
-    '/:id',
-    celebrate(
-        {
-            [Segments.BODY]: updateUserSoftSkillsSchema,
-            [Segments.PARAMS]: validateIdSchema,
-        },
-        configValidateRoute,
-    ),
-    userSoftSkillsController.update,
+  '/:id',
+  celebrate(
+    {
+      [Segments.BODY]: updateUserSoftSkillsSchema,
+      [Segments.PARAMS]: validateIdSchema,
+    },
+    configValidateRoute,
+  ),
+  userSoftSkillsController.update,
 );
 
 router.delete(
-    '/:id',
-    celebrate(
-        {
-            [Segments.PARAMS]: validateIdSchema,
-        },
-        configValidateRoute,
-    ),
-    userSoftSkillsController.remove,
+  '/:id',
+  celebrate(
+    {
+      [Segments.PARAMS]: validateIdSchema,
+    },
+    configValidateRoute,
+  ),
+  userSoftSkillsController.remove,
 );
 
 export default router;

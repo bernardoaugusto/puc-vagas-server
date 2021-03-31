@@ -7,6 +7,7 @@ import passwordRouter from '@modules/users/infra/http/routes/password.routes';
 import softSkillsRouter from '@modules/softSkills/infra/http/routes/softSkill.routes';
 import vacanciesRouter from '@modules/vacancies/infra/http/routes/vacancy.routes';
 import companiesRouter from '@modules/companies/infra/http/routes/company.routes';
+import userSoftSkills from '@modules/userSoftSkills/infra/http/routes/userSoftSkills.routes';
 
 const routes = Router();
 
@@ -18,5 +19,6 @@ routes.use('/api/password', passwordRouter);
 routes.use('/api/soft-skills', softSkillsRouter);
 routes.use('/api/vacancies', vacanciesRouter);
 routes.use('/api/companies', companiesRouter);
+routes.use('/api/user-soft-skills', userSoftSkills);
 
 export default routes;

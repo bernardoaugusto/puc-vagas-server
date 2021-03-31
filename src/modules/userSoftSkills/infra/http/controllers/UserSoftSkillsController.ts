@@ -9,54 +9,74 @@ import UpdateUserSoftSkillsService from '../../../services/UpdateUserSoftSkillsS
 import RemoveUserSoftSkillsService from '../../../services/RemoveUserSoftSkillsService';
 
 export default class UserSoftSkillsController {
-    public async create(request: Request, response: Response): Promise<Response> {
-        const userSoftSkills = request.body;
+  public async create(request: Request, response: Response): Promise<Response> {
+    const userSoftSkills = request.body;
 
-        const createUserSoftSkillsService = container.resolve(CreateUserSoftSkillsService);
+    const createUserSoftSkillsService = container.resolve(
+      CreateUserSoftSkillsService,
+    );
 
-        const userSoftSkillsCreated = await createUserSoftSkillsService.execute(userSoftSkills);
+    const userSoftSkillsCreated = await createUserSoftSkillsService.execute(
+      userSoftSkills,
+    );
 
-        return response.status(201).json(classToClass(userSoftSkillsCreated));
-    }
+    return response.status(201).json(classToClass(userSoftSkillsCreated));
+  }
 
-    public async getById(request: Request, response: Response): Promise<Response> {
-        const userSoftSkillsId = request.params.id;
+  public async getById(request: Request, response: Response): Promise<Response> {
+    const userSoftSkillsId = request.params.id;
 
-        const getByIdUserSoftSkillsService = container.resolve(GetByIdUserSoftSkillsService);
+    const getByIdUserSoftSkillsService = container.resolve(
+      GetByIdUserSoftSkillsService,
+    );
 
-        const userSoftSkills = await getByIdUserSoftSkillsService.execute(userSoftSkillsId);
+    const userSoftSkills = await getByIdUserSoftSkillsService.execute(
+      userSoftSkillsId,
+    );
 
-        return response.status(200).json(classToClass(userSoftSkills));
-    }
+    return response.status(200).json(classToClass(userSoftSkills));
+  }
 
-    public async getAll(request: Request, response: Response): Promise<Response> {
-        const query = request.query as Record<string, string>;
-        const withPagination = JSON.parse(query.withPagination || 'true');
+  public async getAll(request: Request, response: Response): Promise<Response> {
+    const query = request.query as Record<string, string>;
+    const withPagination = JSON.parse(query.withPagination || 'true');
 
-        const getAllUserSoftSkillsService = container.resolve(GetAllUserSoftSkillsService);
-        const userSoftSkills = await getAllUserSoftSkillsService.execute(query, withPagination);
+    const getAllUserSoftSkillsService = container.resolve(
+      GetAllUserSoftSkillsService,
+    );
+    const userSoftSkills = await getAllUserSoftSkillsService.execute(
+      query,
+      withPagination,
+    );
 
-        return response.status(200).json(classToClass(userSoftSkills));
-    }
+    return response.status(200).json(classToClass(userSoftSkills));
+  }
 
-    public async update(request: Request, response: Response): Promise<Response> {
-        const updates = request.body;
-        const userSoftSkillsId = request.params.id;
+  public async update(request: Request, response: Response): Promise<Response> {
+    const updates = request.body;
+    const userSoftSkillsId = request.params.id;
 
-        const updateUserSoftSkillsService = container.resolve(UpdateUserSoftSkillsService);
+    const updateUserSoftSkillsService = container.resolve(
+      UpdateUserSoftSkillsService,
+    );
 
-        const userSoftSkillsUpdated = await updateUserSoftSkillsService.execute(updates, userSoftSkillsId);
+    const userSoftSkillsUpdated = await updateUserSoftSkillsService.execute(
+      updates,
+      userSoftSkillsId,
+    );
 
-        return response.status(200).json(classToClass(userSoftSkillsUpdated));
-    }
+    return response.status(200).json(classToClass(userSoftSkillsUpdated));
+  }
 
-    public async remove(request: Request, response: Response): Promise<Response> {
-        const userSoftSkillsId = request.params.id;
+  public async remove(request: Request, response: Response): Promise<Response> {
+    const userSoftSkillsId = request.params.id;
 
-        const removeUserSoftSkillsService = container.resolve(RemoveUserSoftSkillsService);
+    const removeUserSoftSkillsService = container.resolve(
+      RemoveUserSoftSkillsService,
+    );
 
-        await removeUserSoftSkillsService.execute(userSoftSkillsId);
+    await removeUserSoftSkillsService.execute(userSoftSkillsId);
 
-        return response.status(204).json();
-    }
+    return response.status(204).json();
+  }
 }
