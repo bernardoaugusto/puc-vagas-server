@@ -14,4 +14,13 @@ export default {
       }),
     )
     .optional(),
+  hard_skills: Joi.array()
+    .items(
+      Joi.object({
+        description: Joi.string().required(),
+        stars: Joi.number().required(),
+      }),
+    )
+    .required(),
+  work_areas_ids: Joi.array().items(Joi.string().uuid().required()).optional(),
 };

@@ -2,6 +2,7 @@ export default interface IVacancyCreateDTO {
   description: string;
   title: string;
   company_id: string;
+  hard_skills: Array<{ description: string; stars: number }>;
 
   region?: string;
   salary_range?: string;
@@ -9,4 +10,5 @@ export default interface IVacancyCreateDTO {
     soft_skill_id: string;
     stars: number;
   }>;
+  work_areas_ids?: Array<string>;
 }

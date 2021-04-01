@@ -5,24 +5,24 @@ import {
   formatPaginateDataToResponse,
 } from '@seidor-cloud-produtos/typeorm';
 
-import WorkAreas from '../infra/typeorm/entities/WorkAreas';
-import IWorkAreasRequestGetAllDTO from '../dtos/IWorkAreasRequestGetAllDTO';
-import IWorkAreasRepositoryDTO from '../repositories/IWorkAreasRepositoryDTO';
+import HardSkills from '../infra/typeorm/entities/HardSkills';
+import IHardSkillsRequestGetAllDTO from '../dtos/IHardSkillsRequestGetAllDTO';
+import IHardSkillsRepositoryDTO from '../repositories/IHardSkillsRepositoryDTO';
 
 @injectable()
-export default class GetAllWorkAreasService {
+export default class GetAllHardSkillsService {
   constructor(
-    @inject('WorkAreasRepository')
-    private workAreasRepository: IWorkAreasRepositoryDTO,
+    @inject('HardSkillsRepository')
+    private hardSkillsRepository: IHardSkillsRepositoryDTO,
   ) {}
 
   public async execute(
-    queryParams: IWorkAreasRequestGetAllDTO,
+    queryParams: IHardSkillsRequestGetAllDTO,
     withPagination: boolean,
   ): Promise<
-    | WorkAreas[]
+    | HardSkills[]
     | ({
-        data: WorkAreas[];
+        data: HardSkills[];
       } & {
         count: number;
         limit: number;
@@ -33,15 +33,15 @@ export default class GetAllWorkAreasService {
     if (withPagination) {
       const options = formatParamsToTypeOrmOptionsWithPaginate(queryParams, true);
 
-      const arrayWorkAreas = await this.workAreasRepository.getAllWithPagination(
+      const arrayHardSkills = await this.hardSkillsRepository.getAllWithPagination(
         options,
       );
 
-      return formatPaginateDataToResponse(queryParams, arrayWorkAreas);
+      return formatPaginateDataToResponse(queryParams, arrayHardSkills);
     }
 
     const options = formatParamsToTypeOrmOptionsWithoutPaginate(queryParams, true);
 
-    return this.workAreasRepository.getAllWithoutPagination(options);
+    return this.hardSkillsRepository.getAllWithoutPagination(options);
   }
 }

@@ -5,17 +5,17 @@ import GetByIdWorkAreasService from './GetByIdWorkAreasService';
 
 @injectable()
 export default class RemoveWorkAreasService {
-    constructor(
-        @inject('WorkAreasRepository')
-        private workAreasRepository: IWorkAreasRepositoryDTO,
+  constructor(
+    @inject('WorkAreasRepository')
+    private workAreasRepository: IWorkAreasRepositoryDTO,
 
-        @inject('GetByIdWorkAreasService')
-        private getByIdWorkAreasService: GetByIdWorkAreasService,
-    ) {}
+    @inject('GetByIdWorkAreasService')
+    private getByIdWorkAreasService: GetByIdWorkAreasService,
+  ) {}
 
-    public async execute(workAreasId: string): Promise<void> {
-        await this.getByIdWorkAreasService.execute(workAreasId);
+  public async execute(workAreasId: string): Promise<void> {
+    await this.getByIdWorkAreasService.execute(workAreasId);
 
-        await this.workAreasRepository.remove(workAreasId);
-    }
+    await this.workAreasRepository.remove(workAreasId);
+  }
 }

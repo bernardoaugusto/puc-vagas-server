@@ -48,10 +48,18 @@ import VacancyLikeDislikeRepository from '@modules/vacancies/infra/typeorm/repos
 // UserLike
 import IUserLikeDislikeRepository from '@modules/users/repositories/IUserLikeDislikeRepository';
 import UserLikeDislikeRepository from '@modules/users/infra/typeorm/repositories/UserLikeDislikeRepository';
+
+// Chat
 import IChatRepository from '@modules/chats/repositories/IChatRepository';
 import ChatRepository from '@modules/chats/infra/typeorm/repositories/ChatRepository';
 import IUsersConnectedRepository from '@modules/chats/repositories/IUsersConnectedRepository';
 import UsersConnectedRepository from '@modules/chats/infra/typeorm/repositories/UsersConnectedRepository';
+
+// Hard Skills
+import IHardSkillsRepositoryDTO from '@modules/hardSkills/repositories/IHardSkillsRepositoryDTO';
+import HardSkillsRepository from '@modules/hardSkills/infra/typeorm/repositories/HardSkillsRepository';
+import GetByIdHardSkillsService from '@modules/hardSkills/services/GetByIdHardSkillsService';
+import CreateHardSkillsService from '@modules/hardSkills/services/CreateHardSkillsService';
 
 container.registerSingleton<IUsersRepository>('UsersRepository', UserRepository);
 container.registerSingleton<IUsersTokenRepository>(
@@ -139,9 +147,23 @@ container.registerSingleton<IUserLikeDislikeRepository>(
   UserLikeDislikeRepository,
 );
 
+// Chat
 container.registerSingleton<IChatRepository>('ChatRepository', ChatRepository);
 
 container.registerType<IUsersConnectedRepository>(
   'UsersConnectedRepository',
   UsersConnectedRepository,
+);
+// Hard Skills
+container.registerSingleton<IHardSkillsRepositoryDTO>(
+  'HardSkillsRepository',
+  HardSkillsRepository,
+);
+container.registerSingleton<CreateHardSkillsService>(
+  'CreateHardSkillsService',
+  CreateHardSkillsService,
+);
+container.registerSingleton<GetByIdHardSkillsService>(
+  'GetByIdHardSkillsService',
+  GetByIdHardSkillsService,
 );

@@ -1,4 +1,3 @@
-import User from '@modules/users/infra/typeorm/entities/User';
 import Vacancy from '@modules/vacancies/infra/typeorm/entities/Vacancy';
 import {
   Entity,
@@ -6,16 +5,23 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
-  ManyToMany,
+  ManyToOne,
+  JoinColumn,
 } from 'typeorm';
 
-@Entity('work-areas')
-export default class WorkAreas {
+@Entity('hard-skills')
+export default class HardSkills {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
+  @Column({ type: 'uuid' })
+  vacancy_id: string;
+
   @Column()
   description: string;
+
+  @Column()
+  stars: number;
 
   @CreateDateColumn()
   created_at: Date;
@@ -23,9 +29,7 @@ export default class WorkAreas {
   @UpdateDateColumn()
   updated_at: Date;
 
-  @ManyToMany(() => User, user => user.work_areas)
-  users: User[];
-
-  @ManyToMany(() => Vacancy, vacancy => vacancy.work_areas)
-  vacancy: Vacancy[];
+  @ManyToOne(() => Vacancy, vacancy => vacancy.hard_skills)
+  @JoinColumn({ name: 'vacancy_id' })
+  vacancy?: Vacancy;
 }
