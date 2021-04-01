@@ -1,20 +1,25 @@
 import AppError from '@shared/errors/AppError';
 import { inject, injectable } from 'tsyringe';
 import ISendMessageDTO from '../dtos/ISendMessageDTO';
+import UsersConnected from '../infra/typeorm/schemas/UsersConnected';
 import IChatRepository from '../repositories/IChatRepository';
+import IUsersConnectedRepository from '../repositories/IUsersConnectedRepository';
 
 @injectable()
 export default class SendMessageService {
   constructor(
     @inject('ChatRepository')
     private chatRepository: IChatRepository,
+
+    @inject('UsersConnectedRepository')
+    private usersConnectedRepository: IUsersConnectedRepository,
   ) {}
 
   public async execute({
     message,
     send_by,
     send_to,
-  }: ISendMessageDTO): Promise<void> {
+  }: ISendMessageDTO): Promise<UsersConnected | undefined> {
     if (send_by === send_to) {
       throw new AppError(`You can't send message to yourself`);
     }
@@ -96,5 +101,7 @@ export default class SendMessageService {
 
     await this.chatRepository.save(has_chat_for_recipient);
     await this.chatRepository.save(has_chat_for_sender);
+
+    return this.usersConnectedRepository.findByUserId(send_to);
   }
 }

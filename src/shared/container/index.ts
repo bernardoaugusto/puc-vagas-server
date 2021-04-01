@@ -50,6 +50,9 @@ import IUserLikeDislikeRepository from '@modules/users/repositories/IUserLikeDis
 import UserLikeDislikeRepository from '@modules/users/infra/typeorm/repositories/UserLikeDislikeRepository';
 import IChatRepository from '@modules/chats/repositories/IChatRepository';
 import ChatRepository from '@modules/chats/infra/typeorm/repositories/ChatRepository';
+import IUsersConnected from '@modules/chats/repositories/IUsersConnected';
+import IUsersConnectedRepository from '@modules/chats/repositories/IUsersConnectedRepository';
+import UsersConnectedRepository from '@modules/chats/infra/typeorm/repositories/UsersConnectedRepository';
 
 container.registerSingleton<IUsersRepository>('UsersRepository', UserRepository);
 container.registerSingleton<IUsersTokenRepository>(
@@ -138,3 +141,8 @@ container.registerSingleton<IUserLikeDislikeRepository>(
 );
 
 container.registerSingleton<IChatRepository>('ChatRepository', ChatRepository);
+
+container.registerType<IUsersConnectedRepository>(
+  'UsersConnectedRepository',
+  UsersConnectedRepository,
+);

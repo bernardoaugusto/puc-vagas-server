@@ -5,5 +5,6 @@ declare namespace Express {
       is_contractor: boolean;
       is_teacher: boolean;
     };
+    io: any;
   }
 }

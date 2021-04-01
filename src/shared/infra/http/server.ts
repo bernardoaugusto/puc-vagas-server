@@ -1,5 +1,6 @@
 import 'reflect-metadata';
 import 'dotenv/config';
+import { createServer } from 'http';
 import 'express-async-errors';
 
 import express, { Request, Response, NextFunction } from 'express';
@@ -8,12 +9,24 @@ import { errors } from 'celebrate';
 
 import AppError from '@shared/errors/AppError';
 
-import routes from './routes';
+import { Server, Socket } from 'socket.io';
 
 import '@shared/infra/typeorm';
 import '@shared/container';
+import { container } from 'tsyringe';
+import RegisterUserConnected from '@modules/chats/services/RegisterUserConnected';
+import routes from './routes';
 
 const app = express();
+
+const server = createServer(app);
+const io = new Server(server);
+
+app.use((request: Request, response: Response, next: NextFunction) => {
+  request.io = io;
+
+  next();
+});
 
 app.use(cors());
 app.use(express.json());
@@ -34,6 +47,17 @@ app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
     message: err.message,
   });
 });
+
+io.on('connection', async (socket: Socket) => {
+  const registerNewUserConnected = container.resolve(RegisterUserConnected);
+
+  await registerNewUserConnected.execute(
+    String(socket.handshake.query.id),
+    socket.id,
+  );
+});
+
+io.listen(8000);
 
 app.listen(3000, () => {
   // eslint-disable-next-line no-console

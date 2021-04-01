@@ -10,11 +10,16 @@ export default class ChatController {
 
     const sendMessageService = container.resolve(SendMessageService);
 
-    await sendMessageService.execute({
+    const user_data = await sendMessageService.execute({
       message,
       send_by,
       send_to,
     });
+
+    if (user_data)
+      request.io
+        .to(user_data.client_id)
+        .emit('new_message', { from: send_by, message });
 
     return response.status(201).json({ send: true });
   }
