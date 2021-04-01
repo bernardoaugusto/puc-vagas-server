@@ -8,6 +8,7 @@ import InactivateUserService from '@modules/users/services/InactivateUserService
 import CreateCompanyEmployeeService from '@modules/users/services/CreateCompanyEmployeeService';
 import LikeUserService from '@modules/users/services/LikeUserService';
 import DislikeUserService from '@modules/users/services/DislikeUserService';
+import GetAllUsersForVacancy from '@modules/users/services/GetAllUsersForVacancy';
 
 export default class UsersController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -110,5 +111,19 @@ export default class UsersController {
       vacancy_id,
       user_id,
     });
+  }
+
+  public async getAllUsersForLike(
+    request: Request,
+    response: Response,
+  ): Promise<Response> {
+    const { id } = request.user;
+    const { id: vacancy_id } = request.params;
+
+    const getAllUsersForVacancy = container.resolve(GetAllUsersForVacancy);
+
+    const users = await getAllUsersForVacancy.execute(id, vacancy_id);
+
+    return response.status(200).json(users);
   }
 }

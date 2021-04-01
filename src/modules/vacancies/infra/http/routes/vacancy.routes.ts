@@ -62,8 +62,12 @@ router.delete(
   vacancyController.remove,
 );
 
-router.post('/like/:id', vacancyController.like);
-router.post('/dislike/:id', vacancyController.dislike);
-router.get('/get-all/likes', vacancyController.getAllVacanciesForLike);
+router.post('/like/:id', ensureAuthenticated, vacancyController.like);
+router.post('/dislike/:id', ensureAuthenticated, vacancyController.dislike);
+router.get(
+  '/get-all/likes',
+  ensureAuthenticated,
+  vacancyController.getAllVacanciesForLike,
+);
 
 export default router;

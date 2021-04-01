@@ -1,4 +1,4 @@
-import { getRepository, Repository } from 'typeorm';
+import { getRepository, In, Not, Repository } from 'typeorm';
 
 import IUsersRepository from '@modules/users/repositories/IUsersRepository';
 import User from '../entities/User';
@@ -8,6 +8,14 @@ class UsersRepository implements IUsersRepository {
 
   constructor() {
     this.ormRepository = getRepository(User);
+  }
+
+  public async getAllUsersForLikeOrDislike(excluded_ids: string[]): Promise<User[]> {
+    return this.ormRepository.find({
+      where: {
+        id: Not(In(excluded_ids)),
+      },
+    });
   }
 
   public async findById(id: string): Promise<User | undefined> {

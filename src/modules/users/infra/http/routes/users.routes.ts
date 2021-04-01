@@ -76,5 +76,10 @@ usersRouter.put(
 
 usersRouter.post('/like/:id', ensureAuthenticated, usersController.like);
 usersRouter.post('/dislike/:id', ensureAuthenticated, usersController.dislike);
+usersRouter.get(
+  '/get-all/likes',
+  ensureAuthenticated,
+  usersController.getAllUsersForLike,
+);
 
 export default usersRouter;
