@@ -82,4 +82,6 @@ usersRouter.get(
   usersController.getAllUsersForLike,
 );
 
+usersRouter.get('/:id', ensureAuthenticated, usersController.getUserById);
+
 export default usersRouter;

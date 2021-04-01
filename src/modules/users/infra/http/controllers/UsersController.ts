@@ -9,6 +9,7 @@ import CreateCompanyEmployeeService from '@modules/users/services/CreateCompanyE
 import LikeUserService from '@modules/users/services/LikeUserService';
 import DislikeUserService from '@modules/users/services/DislikeUserService';
 import GetAllUsersForVacancy from '@modules/users/services/GetAllUsersForVacancy';
+import GetUserByIdService from '@modules/users/services/GetUserByIdService';
 
 export default class UsersController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -116,7 +117,7 @@ export default class UsersController {
   public async getUserById(request: Request, response: Response): Promise<Response> {
     const { id } = request.params;
 
-    const getUserByIdService = container.resolve();
+    const getUserByIdService = container.resolve(GetUserByIdService);
 
     const data_of_user = await getUserByIdService.execute(id);
 
