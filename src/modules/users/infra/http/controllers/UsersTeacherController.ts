@@ -5,6 +5,7 @@ import { classToClass } from 'class-transformer';
 import CreateUserTeacherService from '@modules/users/services/CreateUserTeacherService';
 import UpdateUserService from '@modules/users/services/UpdateUserService';
 import InactivateUserService from '@modules/users/services/InactivateUserService';
+import RecommendUserService from '@modules/users/services/RecommendUserService';
 
 export default class UsersAdminController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -60,9 +61,9 @@ export default class UsersAdminController {
     const { id } = request.params;
     const { id: teacher_id } = request.user;
 
-    const inactivateUserService = container.resolve(InactivateUserService);
+    const recommendUserService = container.resolve(RecommendUserService);
 
-    await inactivateUserService.execute(id);
+    await recommendUserService.execute(teacher_id, id);
 
     return response.status(204).send();
   }

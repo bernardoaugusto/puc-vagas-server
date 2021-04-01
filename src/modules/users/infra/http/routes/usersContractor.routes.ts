@@ -40,7 +40,7 @@ usersContractorRoutes.put(
 );
 
 usersContractorRoutes.patch(
-  '/:id',
+  '/teste/teste/teste/:id',
   celebrate(
     {
       [Segments.PARAMS]: {

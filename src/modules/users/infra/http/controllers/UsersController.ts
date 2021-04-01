@@ -113,6 +113,16 @@ export default class UsersController {
     });
   }
 
+  public async getUserById(request: Request, response: Response): Promise<Response> {
+    const { id } = request.params;
+
+    const getUserByIdService = container.resolve();
+
+    const data_of_user = await getUserByIdService.execute(id);
+
+    return response.json(data_of_user);
+  }
+
   public async getAllUsersForLike(
     request: Request,
     response: Response,

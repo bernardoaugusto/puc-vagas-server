@@ -56,6 +56,10 @@ export default class RecommendUserService {
       });
     }
 
+    if (has_register_of_user.recommendations.includes(teacher_id)) {
+      throw new AppError('You have already recommended this user');
+    }
+
     has_register_of_user.recommendations.push(teacher_id);
 
     await this.userLikeDislikeRepository.update(has_register_of_user);
