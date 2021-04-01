@@ -13,4 +13,5 @@ export default interface IVacancyRepository {
     options: typeorm.OptionsTypeOrmGetAllWithoutPagination,
   ): Promise<Vacancy[]>;
   remove(id: string): Promise<void>;
+  getAllVacanciesForUser(excluded_ids: Array<string>): Promise<Array<Vacancy>>;
 }

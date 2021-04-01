@@ -1,4 +1,4 @@
-import { Repository, getRepository } from 'typeorm';
+import { Repository, getRepository, Not, In } from 'typeorm';
 import typeorm from '@seidor-cloud-produtos/typeorm';
 
 import Vacancy from '../entities/Vacancy';
@@ -9,6 +9,14 @@ export default class VacancyRepository implements IVacancyRepository {
 
   constructor() {
     this.ormRepository = getRepository(Vacancy);
+  }
+
+  public async getAllVacanciesForUser(excluded_ids: string[]): Promise<Vacancy[]> {
+    return this.ormRepository.find({
+      where: {
+        id: Not(In(excluded_ids)),
+      },
+    });
   }
 
   public async create(vacancyData: Vacancy): Promise<Vacancy> {

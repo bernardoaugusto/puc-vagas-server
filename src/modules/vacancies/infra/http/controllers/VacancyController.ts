@@ -4,6 +4,7 @@ import { classToClass } from 'class-transformer';
 
 import LikeVacancyService from '@modules/vacancies/services/LikeVacancyService';
 import DislikeVacancyService from '@modules/vacancies/services/DislikeVacancyService';
+import GetAllVacanciesForUserService from '@modules/vacancies/services/GetAllVacanciesForUserService';
 import CreateVacancyService from '../../../services/CreateVacancyService';
 import GetByIdVacancyService from '../../../services/GetByIdVacancyService';
 import GetAllVacancyService from '../../../services/GetAllVacancyService';
@@ -89,5 +90,20 @@ export default class VacancyController {
       vacancy_id,
       user_id,
     });
+  }
+
+  public async getAllVacanciesForLike(
+    request: Request,
+    response: Response,
+  ): Promise<Response> {
+    const { id } = request.user;
+
+    const getAllVacanciesForUserService = container.resolve(
+      GetAllVacanciesForUserService,
+    );
+
+    const vacancies = await getAllVacanciesForUserService.execute(id);
+
+    return response.status(200).json(vacancies);
   }
 }
