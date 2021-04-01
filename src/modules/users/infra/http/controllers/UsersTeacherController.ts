@@ -55,4 +55,15 @@ export default class UsersAdminController {
 
     return response.status(204).send();
   }
+
+  public async recommend(request: Request, response: Response): Promise<Response> {
+    const { id } = request.params;
+    const { id: teacher_id } = request.user;
+
+    const inactivateUserService = container.resolve(InactivateUserService);
+
+    await inactivateUserService.execute(id);
+
+    return response.status(204).send();
+  }
 }

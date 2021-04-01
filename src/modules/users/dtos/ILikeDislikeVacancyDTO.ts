@@ -3,4 +3,5 @@ export default interface ILikeDislikeVacancyDTO {
   likes: Array<string>;
   dislikes: Array<string>;
   matches: Array<string>;
+  recommendations: Array<string>;
 }

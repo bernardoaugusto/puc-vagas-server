@@ -4,6 +4,8 @@ import { celebrate, Segments, Joi } from 'celebrate';
 import configValidateRoute from '@config/route';
 import validateNameAndEmailOfUser from '@modules/users/common/validations/validateNameEmailOfUser';
 import UsersTeacherController from '../controllers/UsersTeacherController';
+import ensureAuthenticated from '../middlewares/ensureAuthenticated';
+import ensureTeacher from '../middlewares/ensureTeacher';
 
 const usersTeacherRoutes = Router();
 const usersTeacherController = new UsersTeacherController();
@@ -50,6 +52,13 @@ usersTeacherRoutes.patch(
     configValidateRoute,
   ),
   usersTeacherController.inactivate,
+);
+
+usersTeacherRoutes.patch(
+  '/recommend/:id',
+  ensureAuthenticated,
+  ensureTeacher,
+  usersTeacherController.recommend,
 );
 
 export default usersTeacherRoutes;

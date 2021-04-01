@@ -31,6 +31,7 @@ export default class DisikeVacancyService {
         likes: [],
         dislikes: [],
         matches: [],
+        recommendations: [],
       });
     }
 

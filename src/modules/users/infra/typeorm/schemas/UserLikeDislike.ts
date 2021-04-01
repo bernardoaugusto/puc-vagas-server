@@ -16,4 +16,7 @@ export default class UserLikeDislike {
 
   @Column()
   matches: Array<string>;
+
+  @Column()
+  recommendations: Array<string>;
 }

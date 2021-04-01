@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 
 import AppError from '@shared/errors/AppError';
 
-export default function ensureAdmin(
+export default function ensureTeacher(
   request: Request,
   response: Response,
   next: NextFunction,
