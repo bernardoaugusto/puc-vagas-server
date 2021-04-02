@@ -31,7 +31,10 @@ export default class Vacancy {
   region: string;
 
   @Column({ nullable: true })
-  salary_range: string;
+  start_salary_range: string;
+
+  @Column({ nullable: true })
+  end_salary_range: string;
 
   @CreateDateColumn()
   created_at: Date;
