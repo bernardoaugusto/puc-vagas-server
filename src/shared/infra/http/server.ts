@@ -22,12 +22,6 @@ const app = express();
 const server = createServer(app);
 const io = new Server(server);
 
-app.use((request: Request, response: Response, next: NextFunction) => {
-  request.io = io;
-
-  next();
-});
-
 app.use(cors());
 app.use(express.json());
 app.use(routes);
@@ -63,3 +57,5 @@ app.listen(3000, () => {
   // eslint-disable-next-line no-console
   console.log('😁👌 Server started on port 3000 😁👌');
 });
+
+export default io;

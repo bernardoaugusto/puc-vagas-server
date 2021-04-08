@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import io from '@shared/infra/http/server';
 import { container } from 'tsyringe';
 import SendMessageService from '@modules/chats/services/SendMessageService';
 
@@ -17,9 +18,7 @@ export default class ChatController {
     });
 
     if (user_data)
-      request.io
-        .to(user_data.client_id)
-        .emit('new_message', { from: send_by, message });
+      io.to(user_data.client_id).emit('new_message', { from: send_by, message });
 
     return response.status(201).json({ send: true });
   }
