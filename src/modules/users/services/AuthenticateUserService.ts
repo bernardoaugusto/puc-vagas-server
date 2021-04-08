@@ -55,7 +55,7 @@ export default class AuthenticateUserService {
         is_contractor: user.is_contractor,
       },
       secret,
-      { subject: user.id, expiresIn },
+      { subject: user.id, expiresIn: `${expiresIn}` },
     );
 
     return { user, token };
