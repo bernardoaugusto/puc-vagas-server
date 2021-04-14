@@ -20,27 +20,36 @@ export default class CreateUserSoftSkillsService {
     private usersRepository: IUsersRepository,
   ) {}
 
-  public async execute({
-    soft_skill_id,
-    user_id,
-    stars,
-  }: IUserSoftSkillsCreateDTO): Promise<UserSoftSkills> {
-    const user = await this.usersRepository.findById(user_id);
-    if (!user) throw new AppError('User not found', 404);
+  public async execute(
+    usersSoftSkillsCreate: Array<IUserSoftSkillsCreateDTO>,
+  ): Promise<Array<UserSoftSkills>> {
+    const createSoftSkills: Array<UserSoftSkills> = [];
 
-    await this.getByIdSoftSkillService.execute(soft_skill_id);
+    for (const userSoftSkillsCreate of usersSoftSkillsCreate) {
+      const { user_id, soft_skill_id, stars } = userSoftSkillsCreate;
 
-    const userSoftSkillFinded = await this.userSoftSkillsRepository.findByUserIdAndSoftSkillSd(
-      user_id,
-      soft_skill_id,
-    );
+      const user = await this.usersRepository.findById(user_id);
+      if (!user) throw new AppError(`User not found. ID: ${user}`, 404);
 
-    if (userSoftSkillFinded)
-      throw new AppError('This user already has this soft skill', 400);
+      await this.getByIdSoftSkillService.execute(soft_skill_id);
 
-    const userSoftSkills = new UserSoftSkills();
-    Object.assign(userSoftSkills, { soft_skill_id, user_id, stars });
+      const userSoftSkillFinded = await this.userSoftSkillsRepository.findByUserIdAndSoftSkillSd(
+        user_id,
+        soft_skill_id,
+      );
 
-    return this.userSoftSkillsRepository.create(userSoftSkills);
+      if (userSoftSkillFinded)
+        throw new AppError(
+          `This user already has this soft skill. ID: ${userSoftSkillFinded}`,
+          400,
+        );
+
+      const userSoftSkills = new UserSoftSkills();
+      createSoftSkills.push(
+        Object.assign(userSoftSkills, { soft_skill_id, user_id, stars }),
+      );
+    }
+
+    return this.userSoftSkillsRepository.create(createSoftSkills);
   }
 }

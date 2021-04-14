@@ -6,6 +6,7 @@ import User from '@modules/users/infra/typeorm/entities/User';
 import CreateUserSoftSkillsService from '@modules/userSoftSkills/services/CreateUserSoftSkillsService';
 import GetByIdWorkAreasService from '@modules/workAreas/services/GetByIdWorkAreasService';
 import WorkAreas from '@modules/workAreas/infra/typeorm/entities/WorkAreas';
+import IUserSoftSkillsCreateDTO from '@modules/userSoftSkills/dtos/IUserSoftSkillsCreateDTO';
 import IUsersRepository from '../repositories/IUsersRepository';
 import IHashProvider from '../providers/HashProvider/models/IHashProvider';
 import ICreateUserDTO from '../dtos/ICreateUserDTO';
@@ -68,14 +69,19 @@ export default class CreateUserService {
 
     const createdUser = await this.usersRepository.create(user);
 
-    if (soft_skills)
+    if (soft_skills) {
+      const createSoftSkills: Array<IUserSoftSkillsCreateDTO> = [];
+
       for (const softSkill of soft_skills) {
-        await this.createUserSoftSkillsService.execute({
+        createSoftSkills.push({
           user_id: createdUser.id,
           soft_skill_id: softSkill.soft_skill_id,
           stars: softSkill.stars,
         });
       }
+
+      await this.createUserSoftSkillsService.execute(createSoftSkills);
+    }
 
     return createdUser;
   }

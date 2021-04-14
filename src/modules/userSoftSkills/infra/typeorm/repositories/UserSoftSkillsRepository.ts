@@ -11,7 +11,9 @@ export default class UserSoftSkillsRepository implements IUserSoftSkillsReposito
     this.ormRepository = getRepository(UserSoftSkills);
   }
 
-  public async create(userSoftSkillsData: UserSoftSkills): Promise<UserSoftSkills> {
+  public async create(
+    userSoftSkillsData: Array<UserSoftSkills>,
+  ): Promise<Array<UserSoftSkills>> {
     const userSoftSkills = this.ormRepository.create(userSoftSkillsData);
 
     return this.ormRepository.save(userSoftSkills);

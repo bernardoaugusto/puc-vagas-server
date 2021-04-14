@@ -3,7 +3,7 @@ import typeorm from '@seidor-cloud-produtos/typeorm';
 import UserSoftSkills from '../infra/typeorm/entities/UserSoftSkills';
 
 export default interface IUserSoftSkillsRepository {
-  create(userSoftSkillsData: UserSoftSkills): Promise<UserSoftSkills>;
+  create(userSoftSkillsData: Array<UserSoftSkills>): Promise<Array<UserSoftSkills>>;
   update(updates: UserSoftSkills): Promise<UserSoftSkills>;
   findById(id: string): Promise<UserSoftSkills | undefined>;
   findByUserIdAndSoftSkillSd(
