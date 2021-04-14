@@ -10,7 +10,7 @@ import RemoveUserSoftSkillsService from '../../../services/RemoveUserSoftSkillsS
 
 export default class UserSoftSkillsController {
   public async create(request: Request, response: Response): Promise<Response> {
-    const userSoftSkills = request.body;
+    const userSoftSkills = request.body.user_soft_skills;
 
     const createUserSoftSkillsService = container.resolve(
       CreateUserSoftSkillsService,

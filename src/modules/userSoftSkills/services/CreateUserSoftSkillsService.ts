@@ -40,7 +40,7 @@ export default class CreateUserSoftSkillsService {
 
       if (userSoftSkillFinded)
         throw new AppError(
-          `This user already has this soft skill. ID: ${userSoftSkillFinded}`,
+          `This user already has this soft skill. ID: ${soft_skill_id}`,
           400,
         );
 
