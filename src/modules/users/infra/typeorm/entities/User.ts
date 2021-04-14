@@ -41,11 +41,9 @@ class User {
   @Column({ default: true })
   active: boolean;
 
-  @Exclude()
   @Column({ default: false })
   is_contractor: boolean;
 
-  @Exclude()
   @Column({ default: false })
   is_teacher: boolean;
 

@@ -45,7 +45,7 @@ export default class Vacancy {
   @Column({ type: 'uuid' })
   company_id: string;
 
-  @ManyToOne(() => Company)
+  @ManyToOne(() => Company, { eager: true })
   @JoinColumn({ name: 'company_id' })
   company?: Company;
 
