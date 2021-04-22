@@ -23,7 +23,7 @@ module.exports = [
       database : process.env.MONGO_DBNAME || 'tindev',
       useUnifiedTopology: true,
       entities : [
-        `./${process.env.NODE_ENV === 'production' ? 'dist' : 'src'}/modules/**/infra/typeorm/schemas/*.ts`
+        `./${process.env.NODE_ENV === 'production' ? 'dist' : 'src'}/modules/**/infra/typeorm/schemas/*.{ts,js}`
       ]
     }
 ];
