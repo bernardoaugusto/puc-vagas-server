@@ -7,7 +7,7 @@ import ICreateCompanyEmployeeDTO from '../dtos/ICreateCompanyEmployeeDTO';
 import IUsersRepository from '../repositories/IUsersRepository';
 
 @injectable()
-export default class CreateSoftSkillService {
+export default class CreateCompanyEmployeeService {
   constructor(
     @inject('UsersRepository')
     private usersRepository: IUsersRepository,

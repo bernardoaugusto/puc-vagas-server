@@ -88,7 +88,7 @@ usersRouter.delete(
     },
     configValidateRoute,
   ),
-  usersController.companyEmployee,
+  usersController.removeCompanyEmployee,
 );
 
 usersRouter.post('/like/:id', ensureAuthenticated, usersController.like);
