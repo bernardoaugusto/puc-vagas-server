@@ -74,6 +74,23 @@ usersRouter.put(
   usersController.companyEmployee,
 );
 
+usersRouter.delete(
+  '/company-employee/:id',
+  ensureAuthenticated,
+  celebrate(
+    {
+      [Segments.BODY]: {
+        company_id: Joi.string().uuid().required(),
+      },
+      [Segments.PARAMS]: {
+        ...validateId,
+      },
+    },
+    configValidateRoute,
+  ),
+  usersController.companyEmployee,
+);
+
 usersRouter.post('/like/:id', ensureAuthenticated, usersController.like);
 usersRouter.post('/dislike/:id', ensureAuthenticated, usersController.dislike);
 usersRouter.get(

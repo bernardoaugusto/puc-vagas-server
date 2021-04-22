@@ -10,6 +10,7 @@ import LikeUserService from '@modules/users/services/LikeUserService';
 import DislikeUserService from '@modules/users/services/DislikeUserService';
 import GetAllUsersForVacancy from '@modules/users/services/GetAllUsersForVacancy';
 import GetUserByIdService from '@modules/users/services/GetUserByIdService';
+import DeleteCompanyEmployeeService from '@modules/users/services/DeleteCompanyEmployeeService';
 
 export default class UsersController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -77,6 +78,25 @@ export default class UsersController {
     );
 
     const user_updated = await createCompanyEmployeeService.execute({
+      recruiter_id,
+      company_id,
+    });
+
+    return response.json(classToClass(user_updated));
+  }
+
+  public async removeCompanyEmployee(
+    request: Request,
+    response: Response,
+  ): Promise<Response> {
+    const { company_id } = request.body;
+    const recruiter_id = request.user.id;
+
+    const deleteCompanyEmployeeService = container.resolve(
+      DeleteCompanyEmployeeService,
+    );
+
+    const user_updated = await deleteCompanyEmployeeService.execute({
       recruiter_id,
       company_id,
     });
