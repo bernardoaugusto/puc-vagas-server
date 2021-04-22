@@ -71,7 +71,7 @@ export default class UsersController {
     response: Response,
   ): Promise<Response> {
     const { company_id } = request.body;
-    const recruiter_id = request.user.id;
+    const recruiter_id = request.params.id;
 
     const createCompanyEmployeeService = container.resolve(
       CreateCompanyEmployeeService,
@@ -90,7 +90,7 @@ export default class UsersController {
     response: Response,
   ): Promise<Response> {
     const { company_id } = request.body;
-    const recruiter_id = request.user.id;
+    const recruiter_id = request.params.id;
 
     const deleteCompanyEmployeeService = container.resolve(
       DeleteCompanyEmployeeService,
