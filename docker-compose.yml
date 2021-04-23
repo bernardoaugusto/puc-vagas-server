@@ -6,13 +6,13 @@ services:
             context: .
             dockerfile: Dockerfile
             target: builder
-        command: sh -c "npm run build && npm run m:run && npm run start"
+        command: sh -c "npm run build && npm run m:run && npm run dev:server"
         ports:
             - '3000:3000'
         volumes:
             - .:/usr/app
         environment:
-            NODE_ENV: production
+            NODE_ENV: dev
             DB_HOST: db
             DB_PORT: 5432
             DB_USER: postgres
