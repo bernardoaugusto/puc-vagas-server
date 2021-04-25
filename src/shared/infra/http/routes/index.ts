@@ -21,7 +21,7 @@ routes.use('/api/contractors', usersContractororRouter);
 routes.use('/api/sessions', sessionsRouter);
 routes.use('/api/password', passwordRouter);
 routes.use('/api/soft-skills', ensureAuthenticated, softSkillsRouter);
-routes.use('/api/work-areas ', ensureAuthenticated, workAreas);
+routes.use('/api/work-areas', ensureAuthenticated, workAreas);
 routes.use('/api/vacancies', ensureAuthenticated, vacanciesRouter);
 routes.use('/api/companies', ensureAuthenticated, companiesRouter);
 routes.use('/api/user-soft-skills', ensureAuthenticated, userSoftSkills);
