@@ -4,8 +4,8 @@ import { celebrate, Joi, Segments } from 'celebrate';
 import configValidateRoute from '@config/route';
 import {
   validateDataOfCreateUser,
+  validateDataOfUpdateUser,
   validateId,
-  validateUserData,
 } from '@modules/users/common/validations/validateNameEmailOfUser';
 import UsersController from '../controllers/UsersController';
 import ensureAuthenticated from '../middlewares/ensureAuthenticated';
@@ -32,7 +32,7 @@ usersRouter.put(
   celebrate(
     {
       [Segments.BODY]: {
-        ...validateUserData,
+        ...validateDataOfUpdateUser,
       },
       [Segments.PARAMS]: {
         ...validateId,

@@ -17,7 +17,6 @@ export const validateUserData = {
 export const validateDataOfCreateUser = {
   ...validateUserData,
   confirm_password: Joi.string().required(),
-  description: Joi.string().optional(),
   soft_skills: Joi.array()
     .items(
       Joi.object({
@@ -26,6 +25,15 @@ export const validateDataOfCreateUser = {
       }),
     )
     .optional(),
+  work_areas_ids: Joi.array().items(Joi.string().uuid().required()).optional(),
+};
+
+export const validateDataOfUpdateUser = {
+  name: Joi.string().required(),
+  email: Joi.string().email().required(),
+  phone_number: Joi.string().required(),
+  identifier: Joi.string().required(),
+  description: Joi.string().optional(),
   work_areas_ids: Joi.array().items(Joi.string().uuid().required()).optional(),
 };
 

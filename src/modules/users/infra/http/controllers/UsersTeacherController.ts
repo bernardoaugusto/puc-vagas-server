@@ -33,16 +33,29 @@ export default class UsersAdminController {
   }
 
   public async update(request: Request, response: Response): Promise<Response> {
-    const { name, email } = request.body;
+    const {
+      name,
+      email,
+      phone_number,
+      identifier,
+      description,
+      work_areas_ids,
+    } = request.body;
     const { id } = request.user;
 
     const updateUserService = container.resolve(UpdateUserService);
 
-    const admin_updated = await updateUserService.execute({
+    const admin_updated = await updateUserService.execute(
+      {
+        name,
+        email,
+        phone_number,
+        identifier,
+        description,
+        work_areas_ids,
+      },
       id,
-      email,
-      name,
-    });
+    );
 
     return response.json(classToClass(admin_updated));
   }
