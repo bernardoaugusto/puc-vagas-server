@@ -6,4 +6,5 @@ export default {
   region: Joi.string().strict(true).optional(),
   start_salary_range: Joi.string().strict(true).optional(),
   end_salary_range: Joi.string().strict(true).optional(),
+  work_areas_ids: Joi.array().items(Joi.string().uuid().required()).optional(),
 };
