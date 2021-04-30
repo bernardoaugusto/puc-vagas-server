@@ -56,7 +56,11 @@ export default class Vacancy {
   @JoinColumn({ name: 'recruiter_id' })
   recruiter?: User;
 
-  @OneToMany(() => VacancySoftSkills, vacancySoftSkills => vacancySoftSkills.vacancy)
+  @OneToMany(
+    () => VacancySoftSkills,
+    vacancySoftSkills => vacancySoftSkills.vacancy,
+    { eager: true },
+  )
   vacancy_soft_skills: VacancySoftSkills[];
 
   @ManyToMany(() => WorkAreas, workAreas => workAreas.vacancy, { eager: true })
