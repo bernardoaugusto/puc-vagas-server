@@ -41,7 +41,7 @@ export default class UpdateUserService {
         throw new AppError('There are unregistered work areas');
 
       finded_user.work_areas = getWorkAreas;
-    }
+    } else finded_user.work_areas = [];
 
     return this.usersRepository.save(finded_user);
   }
