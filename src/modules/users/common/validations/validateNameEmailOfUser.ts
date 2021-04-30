@@ -11,11 +11,13 @@ export const validateUserData = {
   phone_number: Joi.string().required(),
   identifier: Joi.string().required(),
   password: Joi.string().required(),
+  description: Joi.string().optional(),
 };
 
 export const validateDataOfCreateUser = {
   ...validateUserData,
   confirm_password: Joi.string().required(),
+  description: Joi.string().optional(),
   soft_skills: Joi.array()
     .items(
       Joi.object({

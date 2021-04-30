@@ -30,6 +30,7 @@ export default class CreateUserService {
   public async execute({
     confirm_password,
     email,
+    description,
     identifier,
     name,
     password,
@@ -49,6 +50,7 @@ export default class CreateUserService {
     const user = new User();
     Object.assign(user, {
       name,
+      description,
       email,
       password: hashed_password,
       identifier,

@@ -17,6 +17,7 @@ export default class UsersController {
     const {
       name,
       email,
+      description,
       password,
       identifier,
       confirm_password,
@@ -31,6 +32,7 @@ export default class UsersController {
       email,
       password,
       name,
+      description,
       identifier,
       confirm_password,
       phone_number,

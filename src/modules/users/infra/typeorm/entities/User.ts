@@ -24,6 +24,9 @@ class User {
   @Column()
   name: string;
 
+  @Column({ nullable: true })
+  description: string;
+
   @Column()
   @Exclude()
   password: string;

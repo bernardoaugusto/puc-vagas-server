@@ -6,6 +6,7 @@ export default interface ICreateUserDTO {
   identifier: string;
   confirm_password: string;
 
+  description?: string;
   is_contractor?: boolean;
   is_teacher?: boolean;
   soft_skills?: Array<{
