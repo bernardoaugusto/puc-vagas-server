@@ -34,9 +34,6 @@ usersRouter.put(
       [Segments.BODY]: {
         ...validateDataOfUpdateUser,
       },
-      [Segments.PARAMS]: {
-        ...validateId,
-      },
     },
     configValidateRoute,
   ),
