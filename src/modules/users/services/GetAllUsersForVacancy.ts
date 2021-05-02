@@ -6,7 +6,7 @@ import IUsersRepository from '../repositories/IUsersRepository';
 @injectable()
 export default class GetAllUsersForVacancy {
   constructor(
-    @inject('VacancyRepository')
+    @inject('UsersRepository')
     private usersRepository: IUsersRepository,
 
     @inject('VacancyLikeDislikeRepository')
