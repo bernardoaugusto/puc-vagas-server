@@ -66,7 +66,9 @@ class User {
   @OneToMany(() => Vacancy, vacancy => vacancy.company)
   vacancies: Vacancy[];
 
-  @OneToMany(() => UserSoftSkills, userSoftSkills => userSoftSkills.user)
+  @OneToMany(() => UserSoftSkills, userSoftSkills => userSoftSkills.user, {
+    eager: true,
+  })
   user_soft_skills: UserSoftSkills[];
 
   @ManyToMany(() => WorkAreas, workAreas => workAreas.users, { eager: true })
