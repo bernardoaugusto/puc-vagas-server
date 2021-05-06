@@ -9,6 +9,7 @@ import {
 } from '@modules/users/common/validations/validateNameEmailOfUser';
 import UsersController from '../controllers/UsersController';
 import ensureAuthenticated from '../middlewares/ensureAuthenticated';
+import validateIdSchema from '../../../../../shared/common/validations/validateId';
 
 const usersRouter = Router();
 const usersController = new UsersController();
@@ -98,4 +99,15 @@ usersRouter.get(
 
 usersRouter.get('/:id', ensureAuthenticated, usersController.getUserById);
 
+usersRouter.delete(
+  '/:id',
+  ensureAuthenticated,
+  celebrate(
+    {
+      [Segments.PARAMS]: validateIdSchema,
+    },
+    configValidateRoute,
+  ),
+  usersController.remove,
+);
 export default usersRouter;

@@ -11,6 +11,7 @@ import DislikeUserService from '@modules/users/services/DislikeUserService';
 import GetAllUsersForVacancy from '@modules/users/services/GetAllUsersForVacancy';
 import GetUserByIdService from '@modules/users/services/GetUserByIdService';
 import DeleteCompanyEmployeeService from '@modules/users/services/DeleteCompanyEmployeeService';
+import RemoveUserService from '@modules/users/services/RemoveUserService';
 
 export default class UsersController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -171,5 +172,15 @@ export default class UsersController {
     const users = await getAllUsersForVacancy.execute(id, vacancy_id);
 
     return response.status(200).json(users);
+  }
+
+  public async remove(request: Request, response: Response): Promise<Response> {
+    const userId = request.params.id;
+
+    const removeUserService = container.resolve(RemoveUserService);
+
+    await removeUserService.execute(userId);
+
+    return response.status(204).json();
   }
 }
