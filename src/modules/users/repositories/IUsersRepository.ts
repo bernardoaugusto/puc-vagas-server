@@ -6,4 +6,5 @@ export default interface IUsersRepository {
   create(data: User): Promise<User>;
   save(user: User): Promise<User>;
   getAllUsersForLikeOrDislike(excluded_ids: Array<string>): Promise<Array<User>>;
+  remove(id: string): Promise<void>;
 }
