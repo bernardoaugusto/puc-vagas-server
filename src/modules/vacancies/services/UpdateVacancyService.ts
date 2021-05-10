@@ -29,9 +29,9 @@ export default class UpdateVacancyService {
     const workAreasIds = updates.work_areas_ids;
     updates.work_areas_ids = [];
 
-    const vacancy = await this.getByIdVacancyService.execute(vacancyId);
+    const data = await this.getByIdVacancyService.execute(vacancyId);
 
-    Object.assign(vacancy, updates);
+    Object.assign(data, updates);
 
     if (workAreasIds) {
       const getWorkAreas: Array<WorkAreas> = [];
@@ -42,9 +42,9 @@ export default class UpdateVacancyService {
       if (getWorkAreas.length !== workAreasIds.length)
         throw new AppError('There are unregistered work areas');
 
-      vacancy.work_areas = getWorkAreas;
-    } else vacancy.work_areas = [];
+      data.vacancy.work_areas = getWorkAreas;
+    } else data.vacancy.work_areas = [];
 
-    return this.vacancyRepository.update(vacancy);
+    return this.vacancyRepository.update(data.vacancy);
   }
 }
