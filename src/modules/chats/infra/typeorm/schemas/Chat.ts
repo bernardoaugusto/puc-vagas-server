@@ -6,7 +6,7 @@ interface Message {
   action: 'SENT' | 'RECEIVED';
 }
 
-interface Chats {
+export interface ChatsWithAnotherUser {
   user_id: string;
   messages: Array<Message>;
 }
@@ -20,5 +20,5 @@ export default class Chat {
   user_id: string;
 
   @Column()
-  chats: Array<Chats>;
+  chats: Array<ChatsWithAnotherUser>;
 }
