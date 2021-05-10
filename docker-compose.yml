@@ -9,6 +9,7 @@ services:
         command: sh -c "npm run build && npm run m:run && npm run start"
         ports:
             - '3000:3000'
+            - '8000:8000'
         volumes:
             - .:/usr/app
         environment:

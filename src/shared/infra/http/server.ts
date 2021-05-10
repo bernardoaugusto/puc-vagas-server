@@ -45,6 +45,8 @@ app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
 io.on('connection', async (socket: Socket) => {
   const registerNewUserConnected = container.resolve(RegisterUserConnected);
 
+  io.emit('connected-user', {id: socket.id});
+
   await registerNewUserConnected.execute(
     String(socket.handshake.query.id),
     socket.id,
