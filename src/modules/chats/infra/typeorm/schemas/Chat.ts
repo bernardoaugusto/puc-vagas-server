@@ -1,4 +1,5 @@
-import { Column, Entity, ObjectID, ObjectIdColumn } from 'typeorm';
+import { ObjectID } from 'mongodb';
+import { Column, Entity, ObjectIdColumn } from 'typeorm';
 
 interface Message {
   message: string;

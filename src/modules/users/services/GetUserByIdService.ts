@@ -42,6 +42,12 @@ interface Response {
   work_areas: WorkAreas[];
 
   recommendations: Array<string>;
+
+  likes: Array<string>;
+
+  dislikes: Array<string>;
+
+  matches: Array<string>;
 }
 
 @injectable()
@@ -65,11 +71,29 @@ export default class GetUserByIdService {
       user_id,
     );
 
+    if (!has_recommentadions_for_this_user) {
+      return {
+        ...user_exists,
+        recommendations: [],
+        dislikes: [],
+        likes: [],
+        matches: [],
+      };
+    }
+
+    const {
+      dislikes,
+      matches,
+      likes,
+      recommendations,
+    } = has_recommentadions_for_this_user;
+
     return {
       ...user_exists,
-      recommendations: has_recommentadions_for_this_user
-        ? has_recommentadions_for_this_user.recommendations
-        : [],
+      dislikes,
+      matches,
+      likes,
+      recommendations,
     };
   }
 }

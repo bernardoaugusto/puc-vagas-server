@@ -43,12 +43,15 @@ app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
 });
 
 io.on('connection', async (socket: Socket) => {
-  const registerNewUserConnected = container.resolve(RegisterUserConnected);
+  console.log('usuário conectado', socket.id);
 
-  await registerNewUserConnected.execute(
-    String(socket.handshake.query.id),
-    socket.id,
-  );
+  io.emit('connected-user', { id: socket.id });
+  // const registerNewUserConnected = container.resolve(RegisterUserConnected);
+
+  // await registerNewUserConnected.execute(
+  //   String(socket.handshake.query.id),
+  //   socket.id,
+  // );
 });
 
 io.listen(8000);
