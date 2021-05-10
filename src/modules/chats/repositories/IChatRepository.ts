@@ -5,4 +5,5 @@ export default interface IChatRepository {
   findByUserId(user_id: string): Promise<Chat | undefined>;
   create(chat_data: ICreateChatDTO): Promise<Chat>;
   save(chat_data: Chat): Promise<Chat>;
+  findChat(user_id: string): Promise<Chat | undefined>;
 }

@@ -10,6 +10,14 @@ export default class ChatRepository implements IChatRepository {
     this.ormConfig = getMongoRepository(Chat, 'mongo');
   }
 
+  public async findChat(user_id: string): Promise<Chat | undefined> {
+    return this.ormConfig.findOne({
+      where: {
+        user_id,
+      },
+    });
+  }
+
   public async findByUserId(user_id: string): Promise<Chat | undefined> {
     return this.ormConfig.findOne({
       where: {

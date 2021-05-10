@@ -1,11 +1,12 @@
-import { Column, Entity, ObjectID, ObjectIdColumn } from 'typeorm';
+import { ObjectID } from 'mongodb';
+import { Column, Entity, ObjectIdColumn } from 'typeorm';
 
 interface Message {
   message: string;
   action: 'SENT' | 'RECEIVED';
 }
 
-interface Chats {
+export interface ChatsWithAnotherUser {
   user_id: string;
   messages: Array<Message>;
 }
@@ -19,5 +20,5 @@ export default class Chat {
   user_id: string;
 
   @Column()
-  chats: Array<Chats>;
+  chats: Array<ChatsWithAnotherUser>;
 }
