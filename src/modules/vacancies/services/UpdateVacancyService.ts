@@ -31,7 +31,7 @@ export default class UpdateVacancyService {
 
     const data = await this.getByIdVacancyService.execute(vacancyId);
 
-    Object.assign(data, updates);
+    Object.assign(data.vacancy, updates);
 
     if (workAreasIds) {
       const getWorkAreas: Array<WorkAreas> = [];
