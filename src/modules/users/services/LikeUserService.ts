@@ -50,6 +50,7 @@ export default class LikeUserService {
     );
 
     if (!has_register_of_vacancy) {
+
       has_register_of_vacancy = await this.vacancyLikeDislikeRepository.create({
         vacancy_id,
         likes: [],
@@ -68,7 +69,7 @@ export default class LikeUserService {
     has_register_of_vacancy.likes.push(check_user_liked_exists.id);
 
     const has_register_of_user = await this.userLikeDislikeRepository.findByUserId(
-      user_id,
+      user_liked_id,
     );
 
     if (has_register_of_user) {
@@ -76,7 +77,7 @@ export default class LikeUserService {
 
       if (has_match) {
         // eslint-disable-next-line no-console
-        console.log('match');
+        console.log('match - like user');
 
         has_register_of_user.matches.push(vacancy_id);
         has_register_of_vacancy.matches.push(check_user_liked_exists.id);

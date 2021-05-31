@@ -51,6 +51,7 @@ export default class LikeVacancyService {
     );
 
     if (has_register_of_vacancy) {
+      console.log(has_register_of_user)
       const has_match = has_register_of_vacancy.likes.includes(user_id);
 
       if (has_match) {
