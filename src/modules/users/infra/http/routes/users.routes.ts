@@ -92,7 +92,7 @@ usersRouter.delete(
 usersRouter.post('/like/:id', ensureAuthenticated, usersController.like);
 usersRouter.post('/dislike/:id', ensureAuthenticated, usersController.dislike);
 usersRouter.get(
-  '/get-all/likes',
+  '/get-all/likes/:id',
   ensureAuthenticated,
   usersController.getAllUsersForLike,
 );

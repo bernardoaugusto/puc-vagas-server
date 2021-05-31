@@ -14,7 +14,7 @@ export default class GetAllUsersForVacancy {
   ) {}
 
   public async execute(user_id: string, vacancy_id: string): Promise<Array<User>> {
-    let excluded_ids: Array<string> = [];
+    let excluded_ids: Array<string> = [user_id];
 
     const has_register_of_like_and_dislike = await this.vacancyLikeDislikeRepository.findByVacancyId(
       vacancy_id,
@@ -25,6 +25,8 @@ export default class GetAllUsersForVacancy {
         has_register_of_like_and_dislike.dislikes,
       );
     }
+
+    excluded_ids.push(user_id);
 
     return this.usersRepository.getAllUsersForLikeOrDislike(excluded_ids);
   }
