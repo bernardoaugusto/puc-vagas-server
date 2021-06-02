@@ -6,7 +6,7 @@ import FindChatsService from '@modules/chats/services/FindChatsService';
 
 export default class ChatController {
   public async sendMessage(request: Request, response: Response): Promise<Response> {
-    const { message } = request.body;
+    const { message, vacancy_id } = request.body;
     const { id: send_to } = request.params;
     const { id: send_by } = request.user;
 
@@ -16,10 +16,11 @@ export default class ChatController {
       message,
       send_by,
       send_to,
+      vacancy_id
     });
 
     if (user_data)
-      io.to(user_data.client_id).emit('new_message', { from: send_by, message });
+      io.to(user_data.client_id).emit('new_message', { from: send_by, message, vacancy_id });
 
     return response.status(201).json({ send: true });
   }

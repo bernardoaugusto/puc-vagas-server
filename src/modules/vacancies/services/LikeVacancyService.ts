@@ -54,12 +54,11 @@ export default class LikeVacancyService {
       await this.vacancyLikeDislikeRepository.findByVacancyId(vacancy_id);
 
     if (has_register_of_vacancy) {
-      console.log(has_register_of_user);
       const has_match = has_register_of_vacancy.likes.includes(user_id);
 
       if (has_match) {
         // eslint-disable-next-line no-console
-        console.log('match');
+        //console.log('match');
 
         this.createChatService.execute({
           send_by: user_id,

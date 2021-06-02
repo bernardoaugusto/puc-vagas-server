@@ -19,6 +19,7 @@ export default class SendMessageService {
     message,
     send_by,
     send_to,
+    vacancy_id
   }: ISendMessageDTO): Promise<UsersConnected | undefined> {
     if (send_by === send_to) {
       throw new AppError(`You can't send message to yourself`);
@@ -29,23 +30,35 @@ export default class SendMessageService {
 
     if (!has_chat_for_recipient) {
       has_chat_for_recipient = await this.chatRepository.create({
-        chats: [],
+        chats: [
+          {
+            messages: [],
+            vacancy_id,
+            user_id: send_by,
+          }
+        ],
         user_id: send_to,
       });
     }
 
     if (!has_chat_for_sender) {
       has_chat_for_sender = await this.chatRepository.create({
-        chats: [],
+        chats: [
+          {
+            messages: [],
+            vacancy_id,
+            user_id: send_to,
+          }
+        ],
         user_id: send_by,
       });
     }
 
     const conversation_between_recipient_and_sender_index =
-      has_chat_for_recipient.chats.findIndex(item => item.user_id === send_by);
+      has_chat_for_recipient.chats.findIndex(item => item.user_id === send_by && item.vacancy_id === vacancy_id);
 
     const conversation_between_sender_and_recipient_index =
-      has_chat_for_sender.chats.findIndex(item => item.user_id === send_to);
+      has_chat_for_sender.chats.findIndex(item => item.user_id === send_to && item.vacancy_id === vacancy_id);
 
     if (conversation_between_recipient_and_sender_index >= 0) {
       const { messages } =

@@ -33,7 +33,20 @@ export default class CreateChatService {
         ],
         user_id: send_to,
       });
+    } else {
+      const has_chat_for_vacancy_on_recipient = has_chat_for_recipient.chats.find(chat => chat.vacancy_id === vacancy_id);
+  
+      if(!has_chat_for_vacancy_on_recipient){
+        has_chat_for_recipient.chats.push({
+          messages: [],
+          vacancy_id,
+          user_id: send_by,
+        })
+      }
+
+      await this.chatRepository.save(has_chat_for_recipient);
     }
+    
 
     if (!has_chat_for_sender) {
       has_chat_for_sender = await this.chatRepository.create({
@@ -46,6 +59,19 @@ export default class CreateChatService {
         ],
         user_id: send_by,
       });
+    } else {
+      const has_chat_for_vacancy_on_sender = has_chat_for_sender.chats.find(chat => chat.vacancy_id === vacancy_id);
+  
+      if(!has_chat_for_vacancy_on_sender){
+        has_chat_for_sender.chats.push({
+          messages: [],
+          vacancy_id,
+          user_id: send_to,
+        })
+      }
+
+      await this.chatRepository.save(has_chat_for_sender);
     }
+
   }
 }
