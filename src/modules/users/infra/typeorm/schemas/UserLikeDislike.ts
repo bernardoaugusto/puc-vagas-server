@@ -18,5 +18,8 @@ export default class UserLikeDislike {
   matches: Array<string>;
 
   @Column()
-  recommendations: Array<string>;
+  recommendations: Array<{
+    teacher_id: string;
+    message: string;
+  }>;
 }

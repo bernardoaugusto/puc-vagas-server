@@ -16,6 +16,7 @@ export default class RecommendUserService {
   public async execute(
     teacher_id: string,
     user_recommended_id: string,
+    message: string,
   ): Promise<void> {
     const teacher_exists = await this.usersRepository.findById(teacher_id);
 
@@ -56,11 +57,18 @@ export default class RecommendUserService {
       });
     }
 
-    if (has_register_of_user.recommendations.includes(teacher_id)) {
+    if (
+      has_register_of_user.recommendations.findIndex(
+        item => item.teacher_id === teacher_id,
+      ) >= 0
+    ) {
       throw new AppError('You have already recommended this user');
     }
 
-    has_register_of_user.recommendations.push(teacher_id);
+    has_register_of_user.recommendations.push({
+      message,
+      teacher_id,
+    });
 
     await this.userLikeDislikeRepository.update(has_register_of_user);
   }

@@ -9,14 +9,8 @@ import RecommendUserService from '@modules/users/services/RecommendUserService';
 
 export default class UsersAdminController {
   public async create(request: Request, response: Response): Promise<Response> {
-    const {
-      name,
-      email,
-      password,
-      confirm_password,
-      identifier,
-      phone_number,
-    } = request.body;
+    const { name, email, password, confirm_password, identifier, phone_number } =
+      request.body;
 
     const createUserTeacherService = container.resolve(CreateUserTeacherService);
 
@@ -33,14 +27,8 @@ export default class UsersAdminController {
   }
 
   public async update(request: Request, response: Response): Promise<Response> {
-    const {
-      name,
-      email,
-      phone_number,
-      identifier,
-      description,
-      work_areas_ids,
-    } = request.body;
+    const { name, email, phone_number, identifier, description, work_areas_ids } =
+      request.body;
     const { id } = request.user;
 
     const updateUserService = container.resolve(UpdateUserService);
@@ -73,10 +61,11 @@ export default class UsersAdminController {
   public async recommend(request: Request, response: Response): Promise<Response> {
     const { id } = request.params;
     const { id: teacher_id } = request.user;
+    const { message } = request.body;
 
     const recommendUserService = container.resolve(RecommendUserService);
 
-    await recommendUserService.execute(teacher_id, id);
+    await recommendUserService.execute(teacher_id, id, message);
 
     return response.status(204).send();
   }
