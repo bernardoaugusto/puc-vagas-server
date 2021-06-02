@@ -3,6 +3,7 @@ import { inject, injectable } from 'tsyringe';
 import AppError from '@shared/errors/AppError';
 import IVacancyRepositoryDTO from '@modules/vacancies/repositories/IVacancyRepositoryDTO';
 import IVacancyLikeDislikeRepository from '@modules/vacancies/repositories/IVacancyLikeDislikeRepository';
+import CreateChatService from '@modules/chats/services/CreateChatService';
 import IUsersRepository from '../repositories/IUsersRepository';
 import IUserLikeDislikeRepository from '../repositories/IUserLikeDislikeRepository';
 
@@ -20,6 +21,9 @@ export default class LikeUserService {
 
     @inject('UserLikeDislikeRepository')
     private userLikeDislikeRepository: IUserLikeDislikeRepository,
+
+    @inject('CreateChatService')
+    private createChatService: CreateChatService,
   ) {}
 
   public async execute(
@@ -45,12 +49,10 @@ export default class LikeUserService {
       throw new AppError('User not found');
     }
 
-    let has_register_of_vacancy = await this.vacancyLikeDislikeRepository.findByVacancyId(
-      vacancy_id,
-    );
+    let has_register_of_vacancy =
+      await this.vacancyLikeDislikeRepository.findByVacancyId(vacancy_id);
 
     if (!has_register_of_vacancy) {
-
       has_register_of_vacancy = await this.vacancyLikeDislikeRepository.create({
         vacancy_id,
         likes: [],
@@ -78,6 +80,12 @@ export default class LikeUserService {
       if (has_match) {
         // eslint-disable-next-line no-console
         console.log('match - like user');
+
+        this.createChatService.execute({
+          send_by: user_id,
+          send_to: user_liked_id,
+          vacancy_id,
+        });
 
         has_register_of_user.matches.push(vacancy_id);
         has_register_of_vacancy.matches.push(check_user_liked_exists.id);

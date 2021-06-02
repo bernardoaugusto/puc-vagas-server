@@ -8,6 +8,7 @@ interface Message {
 
 export interface ChatsWithAnotherUser {
   user_id: string;
+  vacancy_id: string;
   messages: Array<Message>;
 }
 

@@ -41,7 +41,10 @@ interface Response {
 
   work_areas: WorkAreas[];
 
-  recommendations: Array<string>;
+  recommendations: Array<{
+    teacher_id: string;
+    message: string;
+  }>;
 
   likes: Array<string>;
 
@@ -67,9 +70,8 @@ export default class GetUserByIdService {
       throw new AppError('User not found');
     }
 
-    const has_recommentadions_for_this_user = await this.userLikeDislikeRepository.findByUserId(
-      user_id,
-    );
+    const has_recommentadions_for_this_user =
+      await this.userLikeDislikeRepository.findByUserId(user_id);
 
     if (!has_recommentadions_for_this_user) {
       return {
@@ -81,12 +83,8 @@ export default class GetUserByIdService {
       };
     }
 
-    const {
-      dislikes,
-      matches,
-      likes,
-      recommendations,
-    } = has_recommentadions_for_this_user;
+    const { dislikes, matches, likes, recommendations } =
+      has_recommentadions_for_this_user;
 
     return {
       ...user_exists,

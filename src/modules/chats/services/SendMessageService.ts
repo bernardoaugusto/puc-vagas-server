@@ -41,18 +41,17 @@ export default class SendMessageService {
       });
     }
 
-    const conversation_between_recipient_and_sender_index = has_chat_for_recipient.chats.findIndex(
-      item => item.user_id === send_by,
-    );
+    const conversation_between_recipient_and_sender_index =
+      has_chat_for_recipient.chats.findIndex(item => item.user_id === send_by);
 
-    const conversation_between_sender_and_recipient_index = has_chat_for_sender.chats.findIndex(
-      item => item.user_id === send_to,
-    );
+    const conversation_between_sender_and_recipient_index =
+      has_chat_for_sender.chats.findIndex(item => item.user_id === send_to);
 
     if (conversation_between_recipient_and_sender_index >= 0) {
-      const { messages } = has_chat_for_recipient.chats[
-        conversation_between_recipient_and_sender_index
-      ];
+      const { messages } =
+        has_chat_for_recipient.chats[
+          conversation_between_recipient_and_sender_index
+        ];
 
       messages.push({
         action: 'RECEIVED',
@@ -62,22 +61,11 @@ export default class SendMessageService {
       has_chat_for_recipient.chats[
         conversation_between_recipient_and_sender_index
       ].messages = messages;
-    } else {
-      has_chat_for_recipient.chats.push({
-        user_id: send_by,
-        messages: [
-          {
-            action: 'RECEIVED',
-            message,
-          },
-        ],
-      });
     }
 
     if (conversation_between_sender_and_recipient_index >= 0) {
-      const { messages } = has_chat_for_sender.chats[
-        conversation_between_sender_and_recipient_index
-      ];
+      const { messages } =
+        has_chat_for_sender.chats[conversation_between_sender_and_recipient_index];
 
       messages.push({
         action: 'SENT',
@@ -87,16 +75,6 @@ export default class SendMessageService {
       has_chat_for_sender.chats[
         conversation_between_sender_and_recipient_index
       ].messages = messages;
-    } else {
-      has_chat_for_sender.chats.push({
-        user_id: send_to,
-        messages: [
-          {
-            action: 'SENT',
-            message,
-          },
-        ],
-      });
     }
 
     await this.chatRepository.save(has_chat_for_recipient);

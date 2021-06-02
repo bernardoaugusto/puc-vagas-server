@@ -54,6 +54,7 @@ import IChatRepository from '@modules/chats/repositories/IChatRepository';
 import ChatRepository from '@modules/chats/infra/typeorm/repositories/ChatRepository';
 import IUsersConnectedRepository from '@modules/chats/repositories/IUsersConnectedRepository';
 import UsersConnectedRepository from '@modules/chats/infra/typeorm/repositories/UsersConnectedRepository';
+import CreateChatService from '@modules/chats/services/CreateChatService';
 
 // Hard Skills
 import IHardSkillsRepositoryDTO from '@modules/hardSkills/repositories/IHardSkillsRepositoryDTO';
@@ -149,6 +150,11 @@ container.registerSingleton<IUserLikeDislikeRepository>(
 
 // Chat
 container.registerSingleton<IChatRepository>('ChatRepository', ChatRepository);
+
+container.registerSingleton<CreateChatService>(
+  'CreateChatService',
+  CreateChatService,
+);
 
 container.registerType<IUsersConnectedRepository>(
   'UsersConnectedRepository',

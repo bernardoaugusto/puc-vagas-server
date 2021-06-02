@@ -3,5 +3,8 @@ export default interface ILikeDislikeVacancyDTO {
   likes: Array<string>;
   dislikes: Array<string>;
   matches: Array<string>;
-  recommendations: Array<string>;
+  recommendations: Array<{
+    teacher_id: string;
+    message: string;
+  }>;
 }

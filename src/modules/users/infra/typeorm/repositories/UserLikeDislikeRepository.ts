@@ -4,7 +4,8 @@ import { getMongoRepository, MongoRepository } from 'typeorm';
 import UserLikeDislike from '../schemas/UserLikeDislike';
 
 export default class UserLikeDislikeRepository
-  implements IUserLikeDislikeRepository {
+  implements IUserLikeDislikeRepository
+{
   private ormRepository: MongoRepository<UserLikeDislike>;
 
   constructor() {

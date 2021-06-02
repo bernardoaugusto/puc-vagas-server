@@ -9,9 +9,8 @@ export default class RegisterUserConnected {
   ) {}
 
   public async execute(user_id: string, client_id: string): Promise<void> {
-    let has_client_id_for_this_user = await this.usersConnectedRepository.findByUserId(
-      user_id,
-    );
+    let has_client_id_for_this_user =
+      await this.usersConnectedRepository.findByUserId(user_id);
 
     if (!has_client_id_for_this_user) {
       has_client_id_for_this_user = await this.usersConnectedRepository.create(

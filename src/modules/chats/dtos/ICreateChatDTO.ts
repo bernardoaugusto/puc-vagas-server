@@ -5,6 +5,7 @@ export interface Message {
 
 export interface Chats {
   user_id: string;
+  vacancy_id: string;
   messages: Array<Message>;
 }
 
