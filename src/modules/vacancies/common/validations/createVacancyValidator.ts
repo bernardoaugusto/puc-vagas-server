@@ -24,4 +24,8 @@ export default {
     )
     .required(),
   work_areas_ids: Joi.array().items(Joi.string().uuid().required()).optional(),
+  end_date: Joi.string()
+    .strict(true)
+    .regex(/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/)
+    .optional(),
 };

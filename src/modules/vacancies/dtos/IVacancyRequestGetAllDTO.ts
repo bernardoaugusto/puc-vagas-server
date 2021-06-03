@@ -4,4 +4,5 @@ export default interface IVacancyRequestGetAllDTO {
   region?: string;
   start_salary_range?: string;
   end_salary_range?: string;
+  end_date?: string;
 }

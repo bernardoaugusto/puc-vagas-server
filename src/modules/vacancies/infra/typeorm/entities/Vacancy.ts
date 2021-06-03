@@ -36,6 +36,9 @@ export default class Vacancy {
   @Column({ nullable: true })
   end_salary_range: string;
 
+  @Column({ type: 'date', nullable: true })
+  end_date: string;
+
   @CreateDateColumn()
   created_at: Date;
 

@@ -5,6 +5,7 @@ export default interface IVacancyDTO {
   region: string;
   start_salary_range: string;
   end_salary_range: string;
+  end_date?: string;
   created_at: Date;
   updated_at: Date;
 }

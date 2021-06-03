@@ -12,4 +12,5 @@ export default interface IVacancyCreateDTO {
     stars: number;
   }>;
   work_areas_ids?: Array<string>;
+  end_date?: string;
 }

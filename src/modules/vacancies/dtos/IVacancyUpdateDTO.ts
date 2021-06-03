@@ -5,4 +5,5 @@ export default interface IVacancyUpdateDTO {
   start_salary_range?: string;
   end_salary_range?: string;
   work_areas_ids: Array<string>;
+  end_date?: string;
 }
