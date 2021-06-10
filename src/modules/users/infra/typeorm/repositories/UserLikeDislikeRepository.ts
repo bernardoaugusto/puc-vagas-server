@@ -24,6 +24,10 @@ export default class UserLikeDislikeRepository
     return this.ormRepository.save(data);
   }
 
+  public async getAll(): Promise<Array<UserLikeDislike> | undefined> {
+    return this.ormRepository.find();
+  }
+
   public async findByUserId(user_id: string): Promise<UserLikeDislike | undefined> {
     return this.ormRepository.findOne({
       where: {

@@ -9,6 +9,7 @@ import CreateCompanyEmployeeService from '@modules/users/services/CreateCompanyE
 import LikeUserService from '@modules/users/services/LikeUserService';
 import DislikeUserService from '@modules/users/services/DislikeUserService';
 import GetAllUsersForVacancy from '@modules/users/services/GetAllUsersForVacancy';
+import GetAllUsersService from '@modules/users/services/GetAllUsersService';
 import GetUserByIdService from '@modules/users/services/GetUserByIdService';
 import DeleteCompanyEmployeeService from '@modules/users/services/DeleteCompanyEmployeeService';
 import RemoveUserService from '@modules/users/services/RemoveUserService';
@@ -170,6 +171,19 @@ export default class UsersController {
     const getAllUsersForVacancy = container.resolve(GetAllUsersForVacancy);
 
     const users = await getAllUsersForVacancy.execute(id, vacancy_id);
+
+    return response.status(200).json(users);
+  }
+
+  public async getAllUsers(
+    request: Request,
+    response: Response,
+  ): Promise<Response> {
+    // const { id } = request.user;
+
+    const getAllUsersService = container.resolve(GetAllUsersService);
+
+    const users = await getAllUsersService.execute();
 
     return response.status(200).json(users);
   }

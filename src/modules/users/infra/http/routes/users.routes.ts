@@ -97,6 +97,12 @@ usersRouter.get(
   usersController.getAllUsersForLike,
 );
 
+usersRouter.get(
+  '/get-all',
+  ensureAuthenticated,
+  usersController.getAllUsers,
+);
+
 usersRouter.get('/:id', ensureAuthenticated, usersController.getUserById);
 
 usersRouter.delete(
