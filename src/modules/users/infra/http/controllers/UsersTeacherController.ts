@@ -60,12 +60,12 @@ export default class UsersAdminController {
 
   public async recommend(request: Request, response: Response): Promise<Response> {
     const { id } = request.params;
-    const { id: teacher_id } = request.user;
+    const { id: teacher_id, name } = request.user;
     const { message } = request.body;
 
     const recommendUserService = container.resolve(RecommendUserService);
 
-    await recommendUserService.execute(teacher_id, id, message);
+    await recommendUserService.execute(teacher_id, id, message, name);
 
     return response.status(204).send();
   }

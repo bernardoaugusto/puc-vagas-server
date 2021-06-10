@@ -53,6 +53,7 @@ export default class AuthenticateUserService {
       {
         is_teacher: user.is_teacher,
         is_contractor: user.is_contractor,
+        name: user.name,
       },
       secret,
       { subject: user.id, expiresIn: `${expiresIn}` },

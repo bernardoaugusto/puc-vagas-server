@@ -21,5 +21,6 @@ export default class UserLikeDislike {
   recommendations: Array<{
     teacher_id: string;
     message: string;
+    name: string;
   }>;
 }

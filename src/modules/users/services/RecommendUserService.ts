@@ -17,6 +17,7 @@ export default class RecommendUserService {
     teacher_id: string,
     user_recommended_id: string,
     message: string,
+    name: string,
   ): Promise<void> {
     const teacher_exists = await this.usersRepository.findById(teacher_id);
 
@@ -68,6 +69,7 @@ export default class RecommendUserService {
     has_register_of_user.recommendations.push({
       message,
       teacher_id,
+      name
     });
 
     await this.userLikeDislikeRepository.update(has_register_of_user);

@@ -11,6 +11,7 @@ interface ITokenPayload {
   sub: string;
   is_contractor: boolean;
   is_teacher: boolean;
+  name: string;
 }
 
 export default function ensureAuthenticated(
@@ -33,12 +34,13 @@ export default function ensureAuthenticated(
 
     const decodedToken = verify(token, authConfig.jwt.secret);
 
-    const { sub, is_contractor, is_teacher } = decodedToken as ITokenPayload;
+    const { sub, is_contractor, is_teacher, name } = decodedToken as ITokenPayload;
 
     request.user = {
       id: sub,
       is_contractor,
       is_teacher,
+      name
     };
 
     return next();

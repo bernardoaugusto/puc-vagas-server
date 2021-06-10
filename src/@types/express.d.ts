@@ -4,6 +4,7 @@ declare namespace Express {
       id: string;
       is_contractor: boolean;
       is_teacher: boolean;
+      name: string;
     };
   }
 }
