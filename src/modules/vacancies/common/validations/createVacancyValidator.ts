@@ -12,6 +12,7 @@ export default {
       Joi.object({
         soft_skill_id: Joi.string().required(),
         stars: Joi.number().required(),
+        priority: Joi.number().required()
       }),
     )
     .optional(),
@@ -20,6 +21,7 @@ export default {
       Joi.object({
         description: Joi.string().required(),
         stars: Joi.number().required(),
+        priority: Joi.number().required()
       }),
     )
     .required(),

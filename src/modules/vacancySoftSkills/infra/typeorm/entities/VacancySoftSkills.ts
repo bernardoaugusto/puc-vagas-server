@@ -24,6 +24,9 @@ export default class VacancySoftSkills {
   @Column()
   stars: number;
 
+  @Column({ nullable: true })
+  priority: number;
+
   @CreateDateColumn()
   created_at: Date;
 

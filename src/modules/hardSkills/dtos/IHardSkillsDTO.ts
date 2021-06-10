@@ -1,6 +1,7 @@
 export default interface IHardSkillsDTO {
   id: string;
-  vacancy_id: string;
   description: string;
+  vacancy_id: string;
   stars: number;
+  priority: number;
 }

@@ -79,6 +79,7 @@ export default class CreateVacancyService {
           vacancy_id: createdVacancy.id,
           soft_skill_id: softSkill.soft_skill_id,
           stars: softSkill.stars,
+          priority: softSkill.priority
         });
       }
 

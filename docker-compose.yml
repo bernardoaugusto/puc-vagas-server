@@ -6,7 +6,8 @@ services:
             context: .
             dockerfile: Dockerfile
             target: builder
-        command: sh -c "npm run build && npm run m:run && npm run start"
+        # command: sh -c "npm run build && npm run m:run && npm run start"
+        command: sh -c "npm run build && npm run start"
         ports:
             - '3000:3000'
             - '8000:8000'

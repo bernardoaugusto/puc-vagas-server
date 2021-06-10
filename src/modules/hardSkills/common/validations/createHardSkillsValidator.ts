@@ -4,4 +4,5 @@ import { Joi } from 'celebrate';
 export const createHardSkillsSchema = {
   description: Joi.string().strict(true).required(),
   stars: Joi.number().strict(true).required(),
+  priority: Joi.number().strict(true).required()
 };
